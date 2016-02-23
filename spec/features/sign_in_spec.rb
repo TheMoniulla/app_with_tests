@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "the signin process", type: :feature do
+describe 'the sign in process', type: :feature do
   before { create(:user, email: 'user@example.com', password: 'password', password_confirmation: 'password') }
 
   it 'signs me in when data is correct' do

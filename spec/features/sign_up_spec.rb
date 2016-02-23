@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "the signup process", type: :feature do
+describe 'the sign up process', type: :feature do
   it 'signs me up when data is correct' do
     visit 'user/sign_up'
     within('#new_user') do
@@ -19,7 +19,7 @@ describe "the signup process", type: :feature do
       fill_in 'Password', with: 'password'
       fill_in 'Password confirmation', with: 'password2'
     end
-    expect { click_button 'Sign up' }.to change { User.count }.by 0
+    expect { click_button 'Sign up' }.not_to change { User.count }
     expect(page).to have_content 'Sign up'
   end
 end
