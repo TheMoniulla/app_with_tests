@@ -10,8 +10,8 @@
     %th Shop
     %th Expense group
     %th Actions
-  - @expenses_by_week.each_pair do |date, expenses|
-    %h3= date_header(date)
+  - @expenses_by_week.each_pair do |week_header, expenses|
+    %h3= week_header
     - expenses.each do |expense|
       %tr
         %td= expense.name
