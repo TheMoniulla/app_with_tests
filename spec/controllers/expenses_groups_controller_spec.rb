@@ -7,6 +7,7 @@ describe ExpensesGroupsController do
 
     context 'after request' do
       before { call_request }
+
       it { should render_template 'index' }
       it { expect(assigns(:expenses_groups)).to eq [expenses_group] }
     end
