@@ -12,5 +12,4 @@
       %td= expenses_group.description
       %td
         = link_to 'Edit', edit_expenses_group_path(expenses_group.id)
-        = link_to 'Show', expenses_group_path(expenses_group.id)
         = link_to 'Delete', expenses_group_path(expenses_group.id), method: :delete, data: {confirm: 'Are you sure?'}

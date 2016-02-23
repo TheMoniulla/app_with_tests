@@ -4,18 +4,18 @@
 %table.table.table-striped
   %tr
     %th Name
-    %th Price Currency
-    %th Price value
+    %th Price
+    %th Currency
     %th Description
     %th Shop
     %th Expense group
     %th Actions
   - @expenses_by_week.each_pair do |date, expenses|
-    = date.strftime("%Y-%m-%d")
+    %h3= date_header(date)
     - expenses.each do |expense|
       %tr
         %td= expense.name
-        %td= expense.price
+        %td= price(expense.price_value)
         %td= expense.price_currency
         %td= expense.description
         %td= expense.shop
@@ -30,21 +30,21 @@
   %table.table.table-striped
     %tr
       %th Name
-      %th Price Currency
-      %th Price value
+      %th Price
+      %th Currency
       %th Description
       %th Shop
-    - expenses_group.expenses.where(user_id: current_user.id).each do |expense|
+    - expenses_group.expenses_for_user(current_user).each do |expense|
       %tr
         %td= expense.name
-        %td= expense.price
+        %td= price(expense.price_value)
         %td= expense.price_currency
         %td= expense.description
         %td= expense.shop
     %tr
       %td TOTAL PRICE
       %td
-        %b= expenses_group.expenses.where(user_id: current_user.id).map(&:price_value).reduce(&:+)
+        %b= expenses_group.total_price_for_user(current_user)
       %td
       %td
       %td

@@ -6,3 +6,5 @@ describe User do
   it { should have_many(:expenses) }
 
 end
+
+
