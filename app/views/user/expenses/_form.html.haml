@@ -1,0 +1,8 @@
+= simple_form_for [:user, @expense] do |f|
+  =f.input :name
+  =f.input :price_currency
+  =f.input :price_value
+  =f.input :shop_id, as: :select, collection: Shop.all, include_blank: false
+  =f.input :description
+  =f.input :expenses_group_id, as: :select, collection: ExpensesGroup.all, include_blank: false
+  =f.submit

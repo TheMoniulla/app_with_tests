@@ -1,0 +1,13 @@
+%h1 Shops
+= link_to 'New shop', new_shop_path, class: 'btn btn-success'
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Actions
+  - @shops.each do |shop|
+    %tr
+      %td= shop.name
+      %td
+        = link_to 'Edit', edit_shop_path(shop.id)
+        = link_to 'Delete', shop_path(shop.id), method: :delete, data: {confirm: 'Are you sure?'}

@@ -1,0 +1,50 @@
+%h1 Expenses
+%p= link_to 'New expense', new_user_expense_path, class: 'btn btn-success'
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Price Currency
+    %th Price value
+    %th Description
+    %th Shop
+    %th Expense group
+    %th Actions
+  - @expenses_by_week.each_pair do |date, expenses|
+    = date.strftime("%Y-%m-%d")
+    - expenses.each do |expense|
+      %tr
+        %td= expense.name
+        %td= expense.price
+        %td= expense.price_currency
+        %td= expense.description
+        %td= expense.shop
+        %td= expense.expenses_group
+        %td
+          = link_to 'Show', user_expense_path(expense.id)
+          = link_to 'Edit', edit_user_expense_path(expense.id)
+          = link_to 'Delete', user_expense_path(expense.id), method: :delete, data: {confirm: 'Are you sure?'}
+
+- @expenses_groups.each do |expenses_group|
+  %h3= expenses_group.name
+  %table.table.table-striped
+    %tr
+      %th Name
+      %th Price Currency
+      %th Price value
+      %th Description
+      %th Shop
+    - expenses_group.expenses.where(user_id: current_user.id).each do |expense|
+      %tr
+        %td= expense.name
+        %td= expense.price
+        %td= expense.price_currency
+        %td= expense.description
+        %td= expense.shop
+    %tr
+      %td TOTAL PRICE
+      %td
+        %b= expenses_group.expenses.where(user_id: current_user.id).map(&:price_value).reduce(&:+)
+      %td
+      %td
+      %td
