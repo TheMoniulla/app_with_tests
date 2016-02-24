@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe ExpensesGroupsController do
+  let!(:user) { create(:user) }
+  before { sign_in(user) }
+
   describe '#index' do
     let(:call_request) { get :index }
     let!(:expenses_group) { create(:expenses_group) }

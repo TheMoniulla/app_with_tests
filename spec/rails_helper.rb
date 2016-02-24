@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'selleo_controller_tests'
+require 'devise'
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -43,6 +44,10 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+
+  RSpec.configure do |config|
+    config.include Devise::TestHelpers, type: :controller
   end
 
   config.include Warden::Test::Helpers
