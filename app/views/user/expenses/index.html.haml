@@ -16,10 +16,10 @@
       %tr
         %td= expense.name
         %td= price(expense.price_value)
-        %td= expense.currency
+        %td= expense.currency.name
         %td= expense.description
-        %td= expense.shop
-        %td= expense.expenses_group
+        %td= expense.shop.name
+        %td= expense.expenses_group.name
         %td
           = link_to 'Show', user_expense_path(expense.id)
           = link_to 'Edit', edit_user_expense_path(expense.id)
@@ -38,9 +38,9 @@
       %tr
         %td= expense.name
         %td= price(expense.price_value)
-        %td= expense.currency
+        %td= expense.currency.name
         %td= expense.description
-        %td= expense.shop
+        %td= expense.shop.name
     %tr
       %td TOTAL PRICE
       %td
