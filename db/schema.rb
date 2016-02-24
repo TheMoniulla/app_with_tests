@@ -11,21 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223072819) do
+ActiveRecord::Schema.define(version: 20160224092053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "currencies", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "expenses", force: :cascade do |t|
     t.string   "name"
-    t.string   "price_currency"
-    t.decimal  "price_value",       precision: 8, scale: 2
     t.text     "description"
     t.integer  "expenses_group_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "shop_id"
+    t.decimal  "price_value"
+    t.string   "price_currency"
+    t.integer  "currency_id"
   end
 
   create_table "expenses_groups", force: :cascade do |t|

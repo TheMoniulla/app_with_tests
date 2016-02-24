@@ -46,6 +46,12 @@ class User::ExpensesController < User::UserController
   end
 
   def expense_params
-    params.require(:expense).permit(:name, :price_currency, :price_value, :description, :expenses_group_id, :user_id, :shop_id)
+    params.require(:expense).permit(:currency_id,
+                                    :description,
+                                    :expenses_group_id,
+                                    :name,
+                                    :price_value,
+                                    :shop_id,
+                                    :user_id)
   end
 end

@@ -1,0 +1,13 @@
+%h1 Currencies
+= link_to 'New currency', new_currency_path, class: 'btn btn-success'
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Actions
+  - @currencies.each do |currency|
+    %tr
+      %td= currency.name
+      %td
+        = link_to 'Edit', edit_currency_path(currency.id)
+        = link_to 'Delete', currency_path(currency.id), method: :delete, data: {confirm: 'Are you sure?'}

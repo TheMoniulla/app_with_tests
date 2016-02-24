@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :expenses
+  resources :currencies
   resources :expenses_groups
   resources :shops, only: [:index, :new, :create, :edit, :update, :destroy]
 
