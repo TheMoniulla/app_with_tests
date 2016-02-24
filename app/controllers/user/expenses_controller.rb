@@ -42,7 +42,8 @@ class User::ExpensesController < User::UserController
   private
 
   def get_expense
-    @expense = current_user.expenses.find(params[:id])
+    @expense = current_user.expenses.find_by_id(params[:id])
+    redirect_to user_expenses_path, alert: "You don't have expense with id: #{params[:id]}!" unless @expense
   end
 
   def expense_params
