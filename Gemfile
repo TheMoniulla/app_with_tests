@@ -40,6 +40,7 @@ gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 gem 'pry'
 gem 'devise'
+gem 'decent_exposure'
 
 group :test do
   #...
