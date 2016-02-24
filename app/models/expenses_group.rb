@@ -4,6 +4,6 @@ class ExpensesGroup < ActiveRecord::Base
   validates :name, presence: true
 
   def total_price_for_user(user)
-    expenses.for_user(user).map(&:price_value).reduce(&:+)
+    expenses.for_user(user).sum(:price_value)
   end
 end
