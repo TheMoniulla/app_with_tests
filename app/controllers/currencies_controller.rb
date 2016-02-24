@@ -1,5 +1,5 @@
 class CurrenciesController < ApplicationController
-  before_action :get_currency, only: [:show, :edit, :update, :destroy]
+  before_action :get_currency, only: [ :edit, :update, :destroy]
 
   def new
     @currency = Currency.new
@@ -7,9 +7,6 @@ class CurrenciesController < ApplicationController
 
   def index
     @currencies = Currency.all
-  end
-
-  def show
   end
 
   def edit

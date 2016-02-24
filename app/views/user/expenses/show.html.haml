@@ -2,13 +2,16 @@
   %b= @expense.name
 
 %p
-  %b Price currency:
-  = @expense.price_currency
+  %b Price
+  = price(@expense.price_value)
+
+%p
+  %b Currency:
+  = @expense.currency.name
 
 %p
   %b Expenses group:
-  = @expense.expenses_group
+  = @expense.expenses_group.name
 
 %p
   = @expense.description
-
