@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'expenses', type: :feature do
   before do
     create(:shop, name: 'Awesome shop')
+    create(:currency, name: 'PLN')
     create(:expenses_group, name: 'Great group')
   end
   let!(:user) { FactoryGirl.create(:user) }
@@ -16,9 +17,9 @@ describe 'expenses', type: :feature do
 
     within('#new_expense') do
       fill_in 'Name', with: 'name'
-      fill_in 'Price currency', with: 'PLN'
       fill_in 'Price value', with: '12'
       fill_in 'Description', with: 'description'
+      select 'PLN', from: 'Currency'
       select 'Awesome shop', from: 'Shop'
       select 'Great group', from: 'Expenses group'
     end

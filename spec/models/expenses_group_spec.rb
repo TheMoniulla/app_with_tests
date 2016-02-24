@@ -15,17 +15,6 @@ describe ExpensesGroup do
     end
   end
 
-  describe '#expenses_for_user' do
-    let(:expenses_group) { create(:expenses_group) }
-    let!(:user) { create(:user) }
-    let!(:expense_1) { create(:expense, expenses_group: expenses_group, user: user) }
-    let!(:expense_2) { create(:expense, expenses_group: expenses_group) }
-
-    it 'returns expenses for user' do
-      expect(expenses_group.expenses_for_user(user)).to eq [expense_1]
-    end
-  end
-
   describe '#total_price_for_user' do
     let(:expenses_group) { create(:expenses_group) }
     let!(:user) { create(:user) }
