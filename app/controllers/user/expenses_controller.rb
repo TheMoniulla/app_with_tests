@@ -2,7 +2,7 @@ class User::ExpensesController < User::UserController
   before_action :get_expense, only: [:edit, :show, :update, :destroy]
 
   def index
-    @expenses = current_user.expenses.all
+    @expenses = current_user.expenses
     @expenses_by_week = current_user.expenses_by_week
     @expenses_groups = ExpensesGroup.all
   end
