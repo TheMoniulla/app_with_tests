@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %title AppWithTests
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    - if current_user
+      = link_to 'Expenses', user_expenses_path
+      = link_to 'Currencies', currencies_path
+      = link_to 'Shops', shops_path
+      = link_to 'Expense_Group', expenses_groups_path
+      = link_to 'Sign out', destroy_user_session_path, method: :delete
+    - else
+      = link_to 'Sign in', new_user_session_path
+      = link_to 'Sign up', new_user_registration_path
+
+    - if notice
+      %p.notice= notice
+    - if alert
+      %p.alert= alert
+
+    = yield
