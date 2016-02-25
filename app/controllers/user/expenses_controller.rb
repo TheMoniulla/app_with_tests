@@ -1,5 +1,8 @@
 class User::ExpensesController < User::UserController
-  expose(:expense, attributes: :expense_params)
+  before_action :check_ownership, only: [:show, :edit, :update, :destroy]
+
+  expose(:expenses) { current_user.expenses }
+  expose(:expense, attributes: :expense_params, finder: :find_by_id)
   expose(:expense_presenter) { expense.decorate }
   expose(:expenses_by_week) { current_user.expenses_by_week }
   expose(:expenses_groups) { ExpensesGroup.all }
@@ -8,7 +11,6 @@ class User::ExpensesController < User::UserController
   expose(:expenses_groups_to_select) { ExpensesGroup.all }
 
   def create
-    @expense = current_user.expenses.find_by_id(params[:id])
     if expense.save
       redirect_to user_expenses_path
     else
@@ -39,5 +41,9 @@ class User::ExpensesController < User::UserController
                                     :price_value,
                                     :shop_id,
                                     :user_id)
+  end
+
+  def check_ownership
+    redirect_to user_expenses_path, alert: 'You are not authorized to see this expense' unless expense
   end
 end
