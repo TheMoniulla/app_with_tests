@@ -6,9 +6,6 @@ class User::ExpensesController < User::UserController
   expose(:expense_presenter) { expense.decorate }
   expose(:expenses_by_week) { current_user.expenses_by_week }
   expose(:expenses_groups) { ExpensesGroup.all }
-  expose(:currencies_to_select) { Currency.all }
-  expose(:shops_to_select) { Shop.all }
-  expose(:expenses_groups_to_select) { ExpensesGroup.all }
 
   def create
     if expense.save
@@ -39,8 +36,7 @@ class User::ExpensesController < User::UserController
                                     :expenses_group_id,
                                     :name,
                                     :price_value,
-                                    :shop_id,
-                                    :user_id)
+                                    :shop_id)
   end
 
   def check_ownership
