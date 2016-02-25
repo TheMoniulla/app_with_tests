@@ -1,6 +1,6 @@
 class CurrenciesController < ApplicationController
+  expose(:currencies)
   expose(:currency, attributes: :currency_params)
-  expose(:currencies) { Currency.all }
 
   def create
     if currency.save

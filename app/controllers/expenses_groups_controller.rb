@@ -1,6 +1,6 @@
 class ExpensesGroupsController < ApplicationController
+  expose(:expenses_groups)
   expose(:expenses_group, attributes: :expenses_group_params)
-  expose(:expenses_groups) { ExpensesGroup.all }
 
   def create
     if expenses_group.save

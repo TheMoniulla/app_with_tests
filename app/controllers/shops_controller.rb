@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
+  expose(:shops)
   expose(:shop, attributes: :shop_params)
-  expose(:shops) { Shop.all }
 
   def create
     if shop.save
