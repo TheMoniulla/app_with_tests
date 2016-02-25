@@ -1,28 +1,17 @@
 class ShopsController < ApplicationController
-  before_action :get_shop, only: [:edit, :update, :destroy]
-
-  def index
-    @shops = Shop.all
-  end
-
-  def new
-    @shop = Shop.new
-  end
+  expose(:shop, attributes: :shop_params)
+  expose(:shops) { Shop.all }
 
   def create
-    @shop = Shop.new(shop_params)
-    if @shop.save
+    if shop.save
       redirect_to shops_path
     else
       render :new
     end
   end
 
-  def edit
-  end
-
   def update
-    if @shop.update_attributes(shop_params)
+    if shop.save
       redirect_to shops_path
     else
       render :edit
@@ -30,15 +19,11 @@ class ShopsController < ApplicationController
   end
 
   def destroy
-    @shop.destroy
-    redirect_to shops_path
+    shop.destroy
+      redirect_to shops_path
   end
 
   private
-
-  def get_shop
-    @shop = Shop.find(params[:id])
-  end
 
   def shop_params
     params.require(:shop).permit(:name)

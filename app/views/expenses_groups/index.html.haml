@@ -6,7 +6,7 @@
     %th Name
     %th Description
     %th Actions
-  - @expenses_groups.each do |expenses_group|
+  - expenses_groups.each do |expenses_group|
     %tr
       %td= expenses_group.name
       %td= expenses_group.description

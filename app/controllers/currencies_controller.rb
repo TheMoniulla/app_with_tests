@@ -18,6 +18,11 @@ class CurrenciesController < ApplicationController
     end
   end
 
+  def destroy
+    currency.destroy
+    redirect_to currencies_path
+  end
+
   private
 
   def currency_params

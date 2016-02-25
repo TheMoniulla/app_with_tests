@@ -41,6 +41,7 @@ gem 'simple_form'
 gem 'pry'
 gem 'devise'
 gem 'decent_exposure'
+gem 'draper', '~> 1.3'
 
 group :test do
   #...

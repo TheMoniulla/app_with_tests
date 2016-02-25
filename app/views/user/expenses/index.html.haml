@@ -10,7 +10,7 @@
     %th Shop
     %th Expense group
     %th Actions
-  - @expenses_by_week.each_pair do |week_header, expenses|
+  - expenses_by_week.each_pair do |week_header, expenses|
     %h3= week_header
     - expenses.each do |expense|
       %tr
@@ -25,7 +25,7 @@
           = link_to 'Edit', edit_user_expense_path(expense.id)
           = link_to 'Delete', user_expense_path(expense.id), method: :delete, data: {confirm: 'Are you sure?'}
 
-- @expenses_groups.each do |expenses_group|
+- expenses_groups.each do |expenses_group|
   %h3= expenses_group.name
   %table.table.table-striped
     %tr

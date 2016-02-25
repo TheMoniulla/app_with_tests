@@ -1,4 +1,4 @@
-= simple_form_for [:user, @expense] do |f|
+= simple_form_for [:user, expense] do |f|
   =f.input :name
   =f.input :price_value
   =f.input :currency_id, as: :select, collection: Currency.all, include_blank: false

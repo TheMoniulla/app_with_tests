@@ -1,17 +1,17 @@
 %h2
-  %b= @expense.name
+  %b= expense.name
 
 %p
   %b Price
-  = price(@expense.price_value)
+  = price(expense.price_value)
 
 %p
   %b Currency:
-  = @expense.currency.name
+  = expense.currency.name
 
 %p
   %b Expenses group:
-  = @expense.expenses_group.name
+  = expense.expenses_group.name
 
 %p
-  = @expense.description
+  = expense.description
