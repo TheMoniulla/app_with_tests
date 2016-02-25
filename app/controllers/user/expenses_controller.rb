@@ -1,8 +1,11 @@
 class User::ExpensesController < User::UserController
   expose(:expense, attributes: :expense_params)
-  expose(:expenses) { current_user.expenses }
+  expose(:expense_presenter) { expense.decorate }
   expose(:expenses_by_week) { current_user.expenses_by_week }
   expose(:expenses_groups) { ExpensesGroup.all }
+  expose(:currencies_to_select) { Currency.all }
+  expose(:shops_to_select) { Shop.all }
+  expose(:expenses_groups_to_select) { ExpensesGroup.all }
 
   def create
     @expense = current_user.expenses.find_by_id(params[:id])
