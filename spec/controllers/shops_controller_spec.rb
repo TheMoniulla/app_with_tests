@@ -42,7 +42,7 @@ describe ShopsController do
     let(:call_request) { post :create, shop: attributes }
 
     context 'valid request' do
-      let(:attributes) { attributes_for(:shop, name: 'name') }
+      let(:attributes) { attributes_for(:currency, name: 'name') }
 
       it { expect { call_request }.to change { Shop.count }.by(1) }
       context 'after request' do
@@ -55,7 +55,7 @@ describe ShopsController do
     end
 
     context 'invalid request' do
-      let(:attributes) { attributes_for(:shop, name: '') }
+      let(:attributes) { attributes_for(:shop, name: nil) }
       it { expect { call_request }.not_to change { Shop.count } }
 
       context 'after request' do
@@ -82,7 +82,7 @@ describe ShopsController do
     end
 
     context 'invalid request' do
-      let(:attributes) { {name: ''} }
+      let(:attributes) { {name: nil} }
 
       it { expect { call_request }.not_to change { shop.reload.name } }
 
