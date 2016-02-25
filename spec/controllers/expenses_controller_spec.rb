@@ -26,18 +26,56 @@ describe User::ExpensesController do
     end
   end
 
-  describe '#edit' do
-    let(:expense) { create(:expense, user: user) }
-    let(:call_request) { get :edit, id: expense.id }
+  describe '#show' do
+    let(:call_request) { get :show, id: expense.id }
 
-    context 'after request' do
-      before { call_request }
+    context 'expense for logged in user' do
+      let(:expense) { create(:expense, user: user) }
 
-      it { should render_template 'edit' }
-      it { expect(controller.expense).to eq expense }
+      context 'after request' do
+        before { call_request }
+
+        it { should render_template 'show' }
+        it { expect(controller.expense).to eq expense }
+      end
+    end
+
+    context 'expense not for logged in user' do
+      let(:expense) { create(:expense) }
+
+      context 'after request' do
+        before { call_request }
+
+        it { should redirect_to user_expenses_path }
+      end
     end
   end
-  #
+
+  describe '#edit' do
+    let(:call_request) { get :edit, id: expense.id }
+
+    context 'expense for logged in user' do
+      let(:expense) { create(:expense, user: user) }
+
+      context 'after request' do
+        before { call_request }
+
+        it { should render_template 'edit' }
+        it { expect(controller.expense).to eq expense }
+      end
+    end
+
+    context 'expense not for logged in user' do
+      let(:expense) { create(:expense) }
+
+      context 'after request' do
+        before { call_request }
+
+        it { should redirect_to user_expenses_path }
+      end
+    end
+  end
+
   describe '#create' do
     let(:call_request) { post :create, expense: attributes }
 
@@ -99,15 +137,30 @@ describe User::ExpensesController do
   end
 
   describe '#destroy' do
-    let!(:expense) { create(:expense, user: user) }
-    let(:call_request) { delete :destroy, id: expense.id, user: user}
+    let(:call_request) { delete :destroy, id: expense.id, user: user }
 
-    it { expect { call_request }.to change { Expense.count }.by(-1) }
+    context 'expense for logged in user' do
+      let!(:expense) { create(:expense, user: user) }
 
-    context 'after request' do
-      before { call_request }
+      it { expect { call_request }.to change { Expense.count }.by(-1) }
 
-      it { should redirect_to user_expenses_path }
+      context 'after request' do
+        before { call_request }
+
+        it { should redirect_to user_expenses_path }
+      end
+    end
+
+    context 'expense not for logged in user' do
+      let!(:expense) { create(:expense) }
+
+      it { expect { call_request }.not_to change { Expense.count } }
+
+      context 'after request' do
+        before { call_request }
+
+        it { should redirect_to user_expenses_path }
+      end
     end
   end
 end
