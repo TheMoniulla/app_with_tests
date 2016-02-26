@@ -5,6 +5,7 @@ class Expense < ActiveRecord::Base
   belongs_to :user
 
   scope :for_user, -> (user) { where(user_id: user.id) }
+  scope :for_week, -> (date) { where(created_at: date.beginning_of_week..date.end_of_week)}
 
   validates :currency_id,
             :expenses_group_id,
@@ -12,4 +13,5 @@ class Expense < ActiveRecord::Base
             :price_value,
             :shop_id,
             :user_id, presence: true
+
 end

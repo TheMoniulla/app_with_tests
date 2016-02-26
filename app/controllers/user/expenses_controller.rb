@@ -4,8 +4,9 @@ class User::ExpensesController < User::UserController
   expose(:expenses) { current_user.expenses }
   expose(:expense, attributes: :expense_params, finder: :find_by_id)
   expose(:expense_presenter) { expense.decorate }
-  expose(:expenses_by_week) { current_user.expenses_by_week }
+  expose(:expenses_for_week) { current_user.expenses.for_week(date) }
   expose(:expenses_groups) { ExpensesGroup.all }
+  expose(:date) { params[:date] ? Date.parse(params[:date]) : Date.today }
 
   def create
     if expense.save

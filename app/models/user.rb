@@ -6,13 +6,4 @@ class User < ActiveRecord::Base
 
   has_many :expenses
 
-  def expenses_by_week
-    expenses.group_by { |u| week_header(u.created_at) }
-  end
-
-  private
-
-  def week_header(date)
-    "#{date.beginning_of_week.strftime('%Y-%m-%d')} - #{date.end_of_week.strftime('%Y-%m-%d')}"
-  end
 end
