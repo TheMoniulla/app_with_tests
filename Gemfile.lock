@@ -105,6 +105,8 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -245,6 +247,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   less-rails
+  letter_opener
   pg
   pry
   rails (= 4.2.5.1)

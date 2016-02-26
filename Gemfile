@@ -42,6 +42,7 @@ gem 'pry'
 gem 'devise'
 gem 'decent_exposure'
 gem 'draper', '~> 1.3'
+gem 'letter_opener', group: :development
 
 group :test do
   #...
