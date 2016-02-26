@@ -23,6 +23,15 @@
         = link_to 'Show', user_expense_path(expense.id)
         = link_to 'Edit', edit_user_expense_path(expense.id)
         = link_to 'Delete', user_expense_path(expense.id), method: :delete, data: {confirm: 'Are you sure?'}
+  %tr
+    %td TOTAL PRICE
+    %td
+      %b= price(current_user.total_price_for_week(date))
+    %td
+    %td
+    %td
+    %td
+    %td
 = link_to 'Previous', user_expenses_path(date: (date - 1.week).strftime('%Y-%m-%d'))
 = link_to 'Next', user_expenses_path(date: (date + 1.week).strftime('%Y-%m-%d'))
 - expenses_groups.each do |expenses_group|

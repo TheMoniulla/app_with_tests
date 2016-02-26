@@ -6,4 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :expenses
 
+  def total_price_for_week(date)
+    expenses.for_week(date).sum(:price_value)
+  end
 end
