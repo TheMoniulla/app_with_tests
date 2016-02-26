@@ -41,8 +41,9 @@ gem 'simple_form'
 gem 'pry'
 gem 'devise'
 gem 'decent_exposure'
-gem 'draper', '~> 1.3'
+gem 'draper', require: false
 gem 'letter_opener', group: :development
+gem 'active_model_serializers'
 
 group :test do
   #...

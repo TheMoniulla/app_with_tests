@@ -13,35 +13,34 @@ class User::ExpensesController < User::UserController
       redirect_to user_expenses_path
     else
       render :new
-      en
     end
+  end
 
-    def update
-      if expense.save
-        redirect_to user_expenses_path
-      else
-        render :edit
-      end
-    end
-
-    def destroy
-      expense.destroy
+  def update
+    if expense.save
       redirect_to user_expenses_path
+    else
+      render :edit
     end
+  end
 
-    private
+  def destroy
+    expense.destroy
+    redirect_to user_expenses_path
+  end
 
-    def expense_params
-      params.require(:expense).permit(:currency_id,
-                                      :description,
-                                      :expenses_group_id,
-                                      :name,
-                                      :price_value,
-                                      :shop_id)
-    end
+  private
 
-    def check_ownership
-      redirect_to user_expenses_path, alert: 'You are not authorized to see this expense' unless expense
-    end
+  def expense_params
+    params.require(:expense).permit(:currency_id,
+                                    :description,
+                                    :expenses_group_id,
+                                    :name,
+                                    :price_value,
+                                    :shop_id)
+  end
+
+  def check_ownership
+    redirect_to user_expenses_path, alert: 'You are not authorized to see this expense' unless expense
   end
 end
