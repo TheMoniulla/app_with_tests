@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :expenses
+  has_many :memberships, inverse_of: :user
+  has_many :groups, through: :memberships
+  has_many :owned_groups, class_name: 'Group', foreign_key: :owner_id
 
   def total_price_for_week(date)
     expenses.for_week(date).sum(:price_value)
