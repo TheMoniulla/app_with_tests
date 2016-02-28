@@ -2,8 +2,7 @@ class User::ExpensesController < User::UserController
   before_action :check_ownership, only: [:show, :edit, :update, :destroy]
 
   expose(:expenses) { current_user.expenses }
-  expose(:expense, attributes: :expense_params, finder: :find_by_id)
-  expose(:expense_presenter) { expense.decorate }
+  expose_decorated(:expense, attributes: :expense_params, finder: :find_by_id)
   expose(:expenses_for_week) { current_user.expenses.for_week(date) }
   expose(:expenses_groups) { ExpensesGroup.all }
   expose(:date) { params[:date] ? Date.parse(params[:date]) : Date.today }

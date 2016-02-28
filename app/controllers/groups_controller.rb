@@ -1,8 +1,7 @@
 class GroupsController < ApplicationController
   before_action :check_ownership, only: [:show, :edit, :update, :destroy]
   expose(:groups) { current_user.owned_groups }
-  expose(:group, attributes: :group_params, finder: :find_by_id)
-  expose(:group_presenter) { group.decorate }
+  expose_decorated(:group, attributes: :group_params, finder: :find_by_id)
 
   def create
     if group.save

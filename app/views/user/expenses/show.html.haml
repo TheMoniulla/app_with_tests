@@ -1,18 +1,18 @@
 %h2
-  %b= expense_presenter.name
+  %b= expense.name
 
 %p
   %b Price
-  = expense_presenter.price
+  = expense.price
 
 %p
   %b Currency:
-  = expense_presenter.currency.name
+  = expense.currency.name
 
 %p
   %b Expenses group:
-  = expense_presenter.expenses_group.name
+  = expense.expenses_group.name
 
 %p
   %b Description:
-  = expense_presenter.description_for_display
+  = expense.description_for_display
