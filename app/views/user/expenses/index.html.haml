@@ -10,7 +10,7 @@
     %th Shop
     %th Expense group
     %th Actions
-  %h3= "#{date.beginning_of_week} - #{date.end_of_week}"
+  %h3= "#{name_of_week(date)}: #{date.beginning_of_week} - #{date.end_of_week}"
   - expenses_for_week.each do |expense|
     %tr
       %td= expense.name
@@ -32,8 +32,9 @@
     %td
     %td
     %td
-= link_to 'Previous', user_expenses_path(date: (date - 1.week).strftime('%Y-%m-%d'))
-= link_to 'Next', user_expenses_path(date: (date + 1.week).strftime('%Y-%m-%d'))
+= link_to "#{name_of_week(date - 1.week)}", user_expenses_path(date: (date - 1.week).strftime('%Y-%m-%d'))
+|
+= link_to "#{name_of_week(date + 1.week)}", user_expenses_path(date: (date + 1.week).strftime('%Y-%m-%d'))
 - expenses_groups.each do |expenses_group|
   %h3= expenses_group.name
   %table.table.table-striped
