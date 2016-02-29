@@ -7,13 +7,12 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :expenses
-    resources :reports
+    resources :reports, only: [:show, :index]
   end
 
-  resources :expenses
-  resources :currencies
+  resources :currencies, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :groups
-  resources :expenses_groups
+  resources :expenses_groups, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :shops, only: [:index, :new, :create, :edit, :update, :destroy]
 
   namespace :api do
