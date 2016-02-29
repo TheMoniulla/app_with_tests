@@ -45,6 +45,7 @@ gem 'draper', require: false
 gem 'letter_opener', group: :development
 gem 'active_model_serializers'
 gem 'decent_decoration'
+gem 'ransack'
 
 group :test do
   #...

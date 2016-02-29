@@ -1,3 +1,8 @@
+= simple_form_for @q, url: user_report_path(@group.id), method: :get do |f|
+  = f.input :name_cont
+  = f.input :user_email_cont
+  = f.submit
+
 %h1=@group.name
 
 %table.table.table-striped
@@ -14,7 +19,6 @@
       %td= expense.decorate.price
       %td= expense.currency.name
       %td= expense.decorate.description_for_display
-      %td= expense.shop.name
       %td= expense.shop.name
       %td= expense.user.email
   %tr
