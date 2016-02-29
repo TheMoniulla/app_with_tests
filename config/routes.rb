@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :expenses
+    resources :reports
   end
 
   resources :expenses
