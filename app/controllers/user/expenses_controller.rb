@@ -2,7 +2,7 @@ class User::ExpensesController < User::UserController
   before_action :check_ownership, only: [:show, :edit, :update, :destroy]
 
   expose(:expenses) { current_user.expenses }
-  expose_decorated(:expense, attributes: :expense_params, finder: :find_by_id)
+  expose_decorated(:expense, attributes: :expense_params)
   expose(:expenses_for_week) { current_user.expenses.for_week(date) }
   expose(:expenses_groups) { ExpensesGroup.all }
   expose(:date) { params[:date] ? Date.parse(params[:date]) : Date.today }
@@ -40,6 +40,10 @@ class User::ExpensesController < User::UserController
   end
 
   def check_ownership
-    redirect_to user_expenses_path, alert: 'You are not authorized to see this expense' unless expense
+    begin
+      expense
+    rescue
+      redirect_to user_expenses_path, alert: 'You are not authorized to see this expense'
+    end
   end
 end
