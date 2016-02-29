@@ -41,7 +41,7 @@ describe ShopsController do
     let(:shop) { create(:shop) }
     let(:call_request) { post :create, shop: attributes }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { attributes_for(:currency, name: 'name') }
 
       it { expect { call_request }.to change { Shop.count }.by(1) }
@@ -54,7 +54,7 @@ describe ShopsController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { attributes_for(:shop, name: nil) }
       it { expect { call_request }.not_to change { Shop.count } }
 
@@ -69,7 +69,7 @@ describe ShopsController do
     let!(:shop) { create(:shop, name: 'name') }
     let(:call_request) { put :update, shop: attributes, id: shop.id }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { {name: 'test'} }
 
       it { expect { call_request }.to change { shop.reload.name }.from('name').to('test') }
@@ -81,7 +81,7 @@ describe ShopsController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { {name: nil} }
 
       it { expect { call_request }.not_to change { shop.reload.name } }

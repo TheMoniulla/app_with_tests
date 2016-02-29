@@ -41,7 +41,7 @@ describe ExpensesGroupsController do
     let(:expenses_group) { create(:expenses_group) }
     let(:call_request) { post :create, expenses_group: attributes }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { attributes_for(:expenses_group, name: 'name', description: 'description') }
 
       it { expect { call_request }.to change { ExpensesGroup.count }.by(1) }
@@ -54,7 +54,7 @@ describe ExpensesGroupsController do
         it { expect(expenses_group.description).to eq 'description' }
       end
     end
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { attributes_for(:expenses_group, name: nil) }
       it { expect { call_request }.not_to change { ExpensesGroup.count } }
 
@@ -69,7 +69,7 @@ describe ExpensesGroupsController do
     let!(:expenses_group) { create(:expenses_group, name: 'name', description: 'description') }
     let(:call_request) { put :update, expenses_group: attributes, id: expenses_group.id }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { {name: 'name', description: 'test'} }
 
       it { expect { call_request }.not_to change { expenses_group.reload.name } }
@@ -82,7 +82,7 @@ describe ExpensesGroupsController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { {name: nil} }
 
       it { expect { call_request }.not_to change { expenses_group.reload.name } }

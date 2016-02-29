@@ -26,7 +26,7 @@ describe Api::V1::CurrenciesController do
   describe '#create' do
     let(:call_request) { post :create, currency: attributes }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { attributes_for(:currency, name: "PLN") }
 
       it { expect { call_request }.to change { Currency.count }.by 1 }
@@ -38,7 +38,7 @@ describe Api::V1::CurrenciesController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { attributes_for(:currency, name: nil) }
 
       it { expect { call_request }.not_to change { Currency.count } }
@@ -54,7 +54,7 @@ describe Api::V1::CurrenciesController do
     let!(:currency) { create(:currency, name: 'name') }
     let(:call_request) { put :update, currency: attributes, id: currency.id }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { {name: 'test'} }
 
       it { expect { call_request }.to change { currency.reload.name }.from('name').to('test') }
@@ -65,7 +65,7 @@ describe Api::V1::CurrenciesController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { {name: nil} }
 
       it { expect { call_request }.not_to change { currency.reload.name } }

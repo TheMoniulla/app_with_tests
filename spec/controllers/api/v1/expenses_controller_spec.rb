@@ -27,7 +27,7 @@ describe Api::V1::ExpensesController do
   describe '#create' do
     let(:call_request) { post :create, expense: attributes }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { attributes_for(:expense, name: 'food') }
 
       it { expect { call_request }.to change { Expense.count }.by 1 }
@@ -39,7 +39,7 @@ describe Api::V1::ExpensesController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { attributes_for(:expense, name: nil) }
 
       it { expect { call_request }.not_to change { Expense.count } }
@@ -55,7 +55,7 @@ describe Api::V1::ExpensesController do
     let!(:expense) { create(:expense, name: 'name') }
     let(:call_request) { put :update, expense: attributes, id: expense.id }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { {name: 'test'} }
 
       it { expect { call_request }.to change { expense.reload.name }.from('name').to('test') }
@@ -66,7 +66,7 @@ describe Api::V1::ExpensesController do
       end
     end
   #
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { {name: nil} }
 
       it { expect { call_request }.not_to change { expense.reload.name } }

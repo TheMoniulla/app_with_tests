@@ -79,7 +79,7 @@ describe User::ExpensesController do
   describe '#create' do
     let(:call_request) { post :create, expense: attributes }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) do
         attributes_for(:expense, name: 'name', user: nil)
       end
@@ -96,7 +96,7 @@ describe User::ExpensesController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { attributes_for(:expenses_group, name: nil) }
       it { expect { call_request }.not_to change { ExpensesGroup.count } }
 
@@ -111,7 +111,7 @@ describe User::ExpensesController do
     let!(:expense) { create(:expense, name: 'name', user: user) }
     let(:call_request) { put :update, expense: attributes, id: expense.id }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { {name: 'test'} }
 
       it { expect { call_request }.to change { expense.reload.name }.from('name').to('test') }
@@ -123,7 +123,7 @@ describe User::ExpensesController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { {name: nil} }
 
       it { expect { call_request }.not_to change { expense.reload.name } }

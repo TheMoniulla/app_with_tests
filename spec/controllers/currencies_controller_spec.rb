@@ -9,7 +9,7 @@ describe CurrenciesController do
 
     context 'after request' do
       before { call_request }
-      it { should render_template 'index' }
+      it { is_expected.to render_template 'index' }
       it { expect(controller.currencies).to eq [currency] }
     end
   end
@@ -41,7 +41,7 @@ describe CurrenciesController do
     let(:currency) { create(:currency) }
     let(:call_request) { post :create, currency: attributes }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { attributes_for(:currency, name: 'name') }
 
       it { expect { call_request }.to change { Currency.count }.by(1) }
@@ -54,7 +54,7 @@ describe CurrenciesController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { attributes_for(:currency, name: nil) }
       it { expect { call_request }.not_to change { Currency.count } }
 
@@ -69,7 +69,7 @@ describe CurrenciesController do
     let!(:currency) { create(:currency, name: 'name') }
     let(:call_request) { put :update, currency: attributes, id: currency.id }
 
-    context 'valid request' do
+    context 'a request has valid params' do
       let(:attributes) { {name: 'test'} }
 
       it { expect { call_request }.to change { currency.reload.name }.from('name').to('test') }
@@ -81,7 +81,7 @@ describe CurrenciesController do
       end
     end
 
-    context 'invalid request' do
+    context 'a request has invalid params' do
       let(:attributes) { {name: nil} }
 
       it { expect { call_request }.not_to change { currency.reload.name } }
