@@ -9,7 +9,7 @@ describe ShopsController do
 
     context 'after request' do
       before { call_request }
-      it { should render_template 'index' }
+      it { is_expected.to render_template 'index' }
       it { expect(controller.shops).to eq [shop] }
     end
   end
@@ -20,7 +20,7 @@ describe ShopsController do
     context 'after request' do
       before { call_request }
 
-      it { should render_template 'new' }
+      it { is_expected.to render_template 'new' }
       it { expect(controller.shop.persisted?).to be false }
     end
   end
@@ -32,7 +32,7 @@ describe ShopsController do
     context 'after request' do
       before { call_request }
 
-      it { should render_template 'edit' }
+      it { is_expected.to render_template 'edit' }
       it { expect(controller.shop).to eq shop }
     end
   end
@@ -49,7 +49,7 @@ describe ShopsController do
         before { call_request }
         let(:shop) { Shop.last }
 
-        it { should redirect_to shops_path }
+        it { is_expected.to redirect_to shops_path }
         it { expect(shop.name).to eq 'name' }
       end
     end
@@ -60,7 +60,7 @@ describe ShopsController do
 
       context 'after request' do
         before { call_request }
-        it { should render_template 'new' }
+        it { is_expected.to render_template 'new' }
       end
     end
   end
@@ -77,7 +77,7 @@ describe ShopsController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to shops_path }
+        it { is_expected.to redirect_to shops_path }
       end
     end
 
@@ -89,7 +89,7 @@ describe ShopsController do
       context 'after request' do
         before { call_request }
 
-        it { should render_template 'edit' }
+        it { is_expected.to render_template 'edit' }
       end
     end
   end
@@ -103,7 +103,7 @@ describe ShopsController do
     context 'after request' do
       before { call_request }
 
-      it { should redirect_to shops_path }
+      it { is_expected.to redirect_to shops_path }
     end
   end
 end

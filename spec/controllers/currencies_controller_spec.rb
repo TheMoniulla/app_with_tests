@@ -20,7 +20,7 @@ describe CurrenciesController do
     context 'after request' do
       before { call_request }
 
-      it { should render_template 'new' }
+      it { is_expected.to render_template 'new' }
       it { expect(controller.currency.persisted?).to be false }
     end
   end
@@ -32,7 +32,7 @@ describe CurrenciesController do
     context 'after request' do
       before { call_request }
 
-      it { should render_template 'edit' }
+      it { is_expected.to render_template 'edit' }
       it { expect(controller.currency).to eq currency }
     end
   end
@@ -49,7 +49,7 @@ describe CurrenciesController do
         before { call_request }
         let(:currency) { Currency.last }
 
-        it { should redirect_to currencies_path }
+        it { is_expected.to redirect_to currencies_path }
         it { expect(currency.name).to eq 'name' }
       end
     end
@@ -60,7 +60,7 @@ describe CurrenciesController do
 
       context 'after request' do
         before { call_request }
-        it { should render_template 'new' }
+        it { is_expected.to render_template 'new' }
       end
     end
   end
@@ -77,7 +77,7 @@ describe CurrenciesController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to currencies_path }
+        it { is_expected.to redirect_to currencies_path }
       end
     end
 
@@ -89,7 +89,7 @@ describe CurrenciesController do
       context 'after request' do
         before { call_request }
 
-        it { should render_template 'edit' }
+        it { is_expected.to render_template 'edit' }
       end
     end
   end
@@ -103,7 +103,7 @@ describe CurrenciesController do
     context 'after request' do
       before { call_request }
 
-      it { should redirect_to currencies_path }
+      it { is_expected.to redirect_to currencies_path }
     end
   end
 end

@@ -10,7 +10,7 @@ describe User::ExpensesController do
 
     context 'after request' do
       before { call_request }
-      it { should render_template 'index' }
+      it { is_expected.to render_template 'index' }
       it { expect(controller.expenses).to eq [expense] }
     end
   end
@@ -21,7 +21,7 @@ describe User::ExpensesController do
     context 'after request' do
       before { call_request }
 
-      it { should render_template 'new' }
+      it { is_expected.to render_template 'new' }
       it { expect(controller.expense.persisted?).to be false }
     end
   end
@@ -30,12 +30,12 @@ describe User::ExpensesController do
     let(:call_request) { get :show, id: expense.id }
 
     context 'expense for logged in user' do
-      let(:expense) { create(:expense, user: user) }
+      let!(:expense) { create(:expense, user: user) }
 
       context 'after request' do
         before { call_request }
 
-        it { should render_template 'show' }
+        it { is_expected.to render_template 'show' }
         it { expect(controller.expense).to eq expense }
       end
     end
@@ -46,7 +46,7 @@ describe User::ExpensesController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to user_expenses_path }
+        it { is_expected.to redirect_to user_expenses_path }
       end
     end
   end
@@ -60,7 +60,7 @@ describe User::ExpensesController do
       context 'after request' do
         before { call_request }
 
-        it { should render_template 'edit' }
+        it { is_expected.to render_template 'edit' }
         it { expect(controller.expense).to eq expense }
       end
     end
@@ -71,7 +71,7 @@ describe User::ExpensesController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to user_expenses_path }
+        it { is_expected.to redirect_to user_expenses_path }
       end
     end
   end
@@ -90,7 +90,7 @@ describe User::ExpensesController do
         before { call_request }
         let(:expense) { Expense.last }
 
-        it { should redirect_to user_expenses_path }
+        it { is_expected.to redirect_to user_expenses_path }
         it { expect(expense.name).to eq 'name' }
         it { expect(expense.description).to eq 'description' }
       end
@@ -102,7 +102,7 @@ describe User::ExpensesController do
 
       context 'after request' do
         before { call_request }
-        it { should render_template 'new' }
+        it { is_expected.to render_template 'new' }
       end
     end
   end
@@ -119,7 +119,7 @@ describe User::ExpensesController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to user_expenses_path }
+        it { is_expected.to redirect_to user_expenses_path }
       end
     end
 
@@ -131,7 +131,7 @@ describe User::ExpensesController do
       context 'after request' do
         before { call_request }
 
-        it { should render_template 'edit' }
+        it { is_expected.to render_template 'edit' }
       end
     end
   end
@@ -147,7 +147,7 @@ describe User::ExpensesController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to user_expenses_path }
+        it { is_expected.to redirect_to user_expenses_path }
       end
     end
 
@@ -159,7 +159,7 @@ describe User::ExpensesController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to user_expenses_path }
+        it { is_expected.to redirect_to user_expenses_path }
       end
     end
   end

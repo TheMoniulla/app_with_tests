@@ -9,7 +9,7 @@ describe ExpensesGroupsController do
 
     context 'after request' do
       before { call_request }
-      it { should render_template 'index' }
+      it { is_expected.to render_template 'index' }
       it { expect(controller.expenses_groups).to eq [expenses_group] }
     end
   end
@@ -20,7 +20,7 @@ describe ExpensesGroupsController do
     context 'after request' do
       before { call_request }
 
-      it { should render_template 'new' }
+      it { is_expected.to render_template 'new' }
       it { expect(controller.expenses_group.persisted?).to be false }
     end
   end
@@ -32,7 +32,7 @@ describe ExpensesGroupsController do
     context 'after request' do
       before { call_request }
 
-      it { should render_template 'edit' }
+      it { is_expected.to render_template 'edit' }
       it { expect(controller.expenses_group).to eq expenses_group }
     end
   end
@@ -49,7 +49,7 @@ describe ExpensesGroupsController do
         before { call_request }
         let(:expenses_group) { ExpensesGroup.last }
 
-        it { should redirect_to expenses_groups_path }
+        it { is_expected.to redirect_to expenses_groups_path }
         it { expect(expenses_group.name).to eq 'name' }
         it { expect(expenses_group.description).to eq 'description' }
       end
@@ -60,7 +60,7 @@ describe ExpensesGroupsController do
 
       context 'after request' do
         before { call_request }
-        it { should render_template 'new' }
+        it { is_expected.to render_template 'new' }
       end
     end
   end
@@ -78,7 +78,7 @@ describe ExpensesGroupsController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to expenses_groups_path }
+        it { is_expected.to redirect_to expenses_groups_path }
       end
     end
 
@@ -90,7 +90,7 @@ describe ExpensesGroupsController do
       context 'after request' do
         before { call_request }
 
-        it { should render_template 'edit' }
+        it { is_expected.to render_template 'edit' }
       end
     end
   end
@@ -104,7 +104,7 @@ describe ExpensesGroupsController do
     context 'after request' do
       before { call_request }
 
-      it { should redirect_to expenses_groups_path }
+      it { is_expected.to redirect_to expenses_groups_path }
     end
   end
 end
