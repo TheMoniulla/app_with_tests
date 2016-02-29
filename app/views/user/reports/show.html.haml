@@ -1,9 +1,9 @@
-= simple_form_for @q, url: user_report_path(@group.id), method: :get do |f|
+= simple_form_for q, url: user_report_path(group.id), method: :get do |f|
   = f.input :name_cont
   = f.input :user_email_cont
   = f.submit
 
-%h1=@group.name
+%h1=group.name
 
 %table.table.table-striped
   %tr
@@ -13,7 +13,7 @@
     %th Description
     %th Shop
     %th User
-  - @expenses.each do |expense|
+  - expenses.each do |expense|
     %tr
       %td= expense.name
       %td= expense.decorate.price
@@ -24,14 +24,14 @@
   %tr
     %td TOTAL PRICE
     %td
-      %b= price(total_price_for_group(@expenses))
+      %b= price(total_price_for_group(expenses))
     %td
     %td
     %td
     %td
     %td
 
-- @expenses_by_group.each_pair do |group_id, expenses|
+- expenses_by_group.each_pair do |group_id, expenses|
   %h3=ExpensesGroup.find(group_id).name
   %table.table.table-striped
     %tr
