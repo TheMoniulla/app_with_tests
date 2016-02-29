@@ -14,5 +14,4 @@ class Expense < ActiveRecord::Base
             :price_value,
             :shop_id,
             :user_id, presence: true
-
 end

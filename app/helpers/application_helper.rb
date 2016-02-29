@@ -6,4 +6,8 @@ module ApplicationHelper
   def name_of_week(date)
     "Week no. #{date.strftime("%U")}"
   end
+
+  def total_price_for_group(expenses)
+    expenses.map(&:price_value).reduce(&:+)
+  end
 end

@@ -17,6 +17,15 @@
       %td= expense.shop.name
       %td= expense.shop.name
       %td= expense.user.email
+  %tr
+    %td TOTAL PRICE
+    %td
+      %b= price(total_price_for_group(@expenses))
+    %td
+    %td
+    %td
+    %td
+    %td
 
 - @expenses_by_group.each_pair do |group_id, expenses|
   %h3=ExpensesGroup.find(group_id).name
@@ -36,3 +45,11 @@
         %td= expense.decorate.description_for_display
         %td= expense.shop.name
         %td= expense.user.email
+    %tr
+      %td TOTAL PRICE
+      %td
+        %b= price(total_price_for_group(expenses))
+      %td
+      %td
+      %td
+      %td
