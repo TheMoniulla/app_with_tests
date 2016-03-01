@@ -5,8 +5,8 @@ describe User::ExpensesController do
   before { sign_in(user) }
 
   describe '#index' do
+    let(:call_request) { get :index }
     let(:expense) { create(:expense, user: user) }
-    let!(:call_request) { get :index }
 
     context 'after request' do
       before { call_request }
@@ -81,7 +81,7 @@ describe User::ExpensesController do
 
     context 'a request has valid params' do
       let(:attributes) do
-        attributes_for(:expense, name: 'name', user: nil)
+        attributes_for(:expense, name: 'name', user: user)
       end
 
       it { expect { call_request }.to change { Expense.count }.by(1) }
@@ -97,8 +97,8 @@ describe User::ExpensesController do
     end
 
     context 'a request has invalid params' do
-      let(:attributes) { attributes_for(:expenses_group, name: nil) }
-      it { expect { call_request }.not_to change { ExpensesGroup.count } }
+      let(:attributes) { attributes_for(:expense, name: nil) }
+      it { expect { call_request }.not_to change { Expense.count } }
 
       context 'after request' do
         before { call_request }
