@@ -46,7 +46,7 @@
     %th Expense group
     %th Actions
   %h3 All planned expenses
-  - shop_items.each do |shop_item|
+  - shop_items.sort_by(&:purchase_date).each do |shop_item|
     %tr
       %td= shop_item.purchase_date
       %td= shop_item.decorate.price
