@@ -3,6 +3,8 @@ class User::ShopItemsController < User::UserController
 
   expose(:shop_items) { current_user.shop_items }
   expose_decorated(:shop_item, attributes: :shop_item_params)
+  expose(:shop_items_for_day) { current_user.shop_items.for_day(date) }
+  expose(:date) { params[:date] ? Date.parse(params[:date]) : Date.today }
 
   def create
     if shop_item.save

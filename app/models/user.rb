@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     shop_items.sum(:price_value)
   end
 
+  def planned_total_price_for_day(date)
+    shop_items.for_day(date).sum(:price_value)
+  end
+
   def compare_expenses_to_last_week(date)
     if total_price_for_week(date) > total_price_for_week(date - 1.week)
       "Your weekly expenses were greater than expenses from last week."

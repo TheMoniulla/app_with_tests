@@ -10,7 +10,42 @@
     %th Shop
     %th Expense group
     %th Actions
-  %h3
+  %h3= "#{date.strftime("%A")}"
+  - shop_items_for_day.each do |shop_item|
+    %tr
+      %td= shop_item.purchase_date
+      %td= shop_item.decorate.price
+      %td= shop_item.name
+      %td= shop_item.currency.name
+      %td= shop_item.shop.name
+      %td= shop_item.expenses_group.name
+      %td
+        = link_to 'Edit', edit_user_shop_item_path(shop_item.id)
+        = link_to 'Delete', user_shop_item_path(shop_item.id), method: :delete, data: {confirm: 'Are you sure?'}
+  %tr
+    %td
+      %b TOTAL PRICE
+    %td
+      %b= price(current_user.planned_total_price_for_day(date))
+    %td
+    %td
+    %td
+    %td
+    %td
+= link_to "#{(date - 1.day).strftime("%A")}", user_shop_items_path(date: (date - 1))
+|
+= link_to "#{(date + 1.day).strftime("%A")}", user_shop_items_path(date: (date + 1))
+
+%table.table.table-striped
+  %tr
+    %th Date
+    %th Price
+    %th Name
+    %th Currency
+    %th Shop
+    %th Expense group
+    %th Actions
+  %h3 All planned expenses
   - shop_items.each do |shop_item|
     %tr
       %td= shop_item.purchase_date

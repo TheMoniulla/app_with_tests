@@ -4,5 +4,7 @@ class ShopItem < ActiveRecord::Base
   belongs_to :expenses_group
   belongs_to :user
 
+  scope :for_day, -> (date) { where(purchase_date: date) }
+
   validates :name, :purchase_date, :price_value, :currency_id, :user_id, presence: true
 end
