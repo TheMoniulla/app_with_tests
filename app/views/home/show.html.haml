@@ -1,3 +1,4 @@
-%h1
+%h2
   - if current_user
-    = link_to 'My expenses', user_expenses_path
+    %p= link_to 'My expenses', user_expenses_path
+    %p= link_to 'Shop lists', user_shop_items_path

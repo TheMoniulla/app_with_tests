@@ -1,0 +1,34 @@
+%h1 Shop list
+%p= link_to 'New item', new_user_shop_item_path, class: 'btn btn-success'
+
+%table.table.table-striped
+  %tr
+    %th Date
+    %th Price
+    %th Name
+    %th Currency
+    %th Shop
+    %th Expense group
+    %th Actions
+  %h3
+  - shop_items.each do |shop_item|
+    %tr
+      %td= shop_item.purchase_date
+      %td= shop_item.decorate.price
+      %td= shop_item.name
+      %td= shop_item.currency.name
+      %td= shop_item.shop.name
+      %td= shop_item.expenses_group.name
+      %td
+        = link_to 'Edit', edit_user_shop_item_path(shop_item.id)
+        = link_to 'Delete', user_shop_item_path(shop_item.id), method: :delete, data: {confirm: 'Are you sure?'}
+  %tr
+    %td
+      %b TOTAL PRICE
+    %td
+      %b= price(current_user.total_price_for_future_expenses)
+    %td
+    %td
+    %td
+    %td
+    %td

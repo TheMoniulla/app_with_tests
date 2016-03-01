@@ -1,6 +1,6 @@
 class ExpensesGroup < ActiveRecord::Base
   has_many :expenses
-
+  has_many :shop_items
   validates :name, presence: true
 
   def total_price_for_user(user)

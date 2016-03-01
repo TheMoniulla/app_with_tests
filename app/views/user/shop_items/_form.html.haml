@@ -1,0 +1,8 @@
+= simple_form_for [:user, shop_item] do |f|
+  = f.input :purchase_date
+  = f.input :name
+  = f.input :price_value
+  = f.association :currency, include_blank: false
+  = f.association :shop, include_blank: false
+  = f.association :expenses_group, include_blank: false
+  = f.submit
