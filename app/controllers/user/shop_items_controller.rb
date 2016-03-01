@@ -1,4 +1,6 @@
 class User::ShopItemsController < User::UserController
+  before_action :check_ownership, only: [:edit, :update, :destroy]
+
   expose(:shop_items) { current_user.shop_items }
   expose_decorated(:shop_item, attributes: :shop_item_params)
 

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :user do
     resources :expenses
     resources :reports, only: [:show, :index]
-    resources :shop_items
+    resources :shop_items, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
   resources :currencies, only: [:index, :new, :create, :edit, :update, :destroy]
