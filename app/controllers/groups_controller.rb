@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   before_action :check_ownership, only: [:show, :edit, :update, :destroy]
   expose(:groups) { current_user.owned_groups }
-  expose_decorated(:group, attributes: :group_params, finder: :find_by_id)
+  expose_decorated(:group, attributes: :group_params)
 
   def create
     if group.save
@@ -31,6 +31,10 @@ class GroupsController < ApplicationController
   end
 
   def check_ownership
-    redirect_to groups_path, alert: 'You are not authorized to see this group' unless group
+    begin
+      group
+    rescue
+      redirect_to groups_path, alert: 'You are not authorized to see this group'
+    end
   end
 end
