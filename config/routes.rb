@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :currencies, only: [:index, :show, :create, :update, :destroy]
       resources :expenses, only: [:index, :show, :create, :update, :destroy]
+      resources :expenses_groups, only: [:index, :show, :create, :update, :destroy]
+      resources :groups, only: [:index, :show, :create, :update, :destroy]
+      resources :shops, only: [:index, :show, :create, :update, :destroy]
     end
   end
 
