@@ -28,6 +28,12 @@ class User::ExpensesController < User::UserController
     redirect_to user_expenses_path
   end
 
+  def send_expenses_mail
+    @user = current_user
+    UserMailer.info_email(@user).deliver
+    redirect_to user_expenses_path
+  end
+
   private
 
   def expense_params

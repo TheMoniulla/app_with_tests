@@ -35,6 +35,8 @@
 = link_to "#{name_of_week(date - 1.week)}", user_expenses_path(date: (date - 1.week).strftime('%Y-%m-%d'))
 |
 = link_to "#{name_of_week(date + 1.week)}", user_expenses_path(date: (date + 1.week).strftime('%Y-%m-%d'))
+
+= link_to 'Send weekly report', send_expenses_mail_user_expenses_path,class: 'btn btn-success'
 - expenses_groups.each do |expenses_group|
   %h3= expenses_group.name
   %table.table.table-striped

@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resource :home, only: :show, controller: :home
 
   namespace :user do
-    resources :expenses
+    resources :expenses do
+      collection do
+        get :send_expenses_mail
+      end
+    end
     resources :reports, only: [:show, :index]
     resources :shop_items, only: [:index, :new, :create, :edit, :update, :destroy]
   end
