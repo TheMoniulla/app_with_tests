@@ -32,20 +32,20 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'pg'
-gem 'haml'
-gem 'therubyracer'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
-gem 'simple_form'
-gem 'pry'
-gem 'devise'
-gem 'decent_exposure'
-gem 'draper', require: false
-gem 'letter_opener', group: :development
-gem 'active_model_serializers'
-gem 'decent_decoration'
-gem 'ransack'
+gem 'pg', '>= 0.18.4'
+gem 'haml', '>= 4.0.7'
+gem 'therubyracer', '>= 0.12.2'
+gem 'less-rails', '>= 2.7.1'
+gem 'twitter-bootstrap-rails', '>= 3.2.2'
+gem 'simple_form', '>= 3.2.1'
+gem 'pry', '>= 0.10.3'
+gem 'devise', '>= 3.5.6'
+gem 'decent_exposure', '>= 2.3.3'
+gem 'draper', '>= 1.4.0', require: false
+gem 'letter_opener', '>= 1.4.1', group: :development
+gem 'active_model_serializers', '>= 0.9.4'
+gem 'decent_decoration', '>= 0.0.6'
+gem 'ransack', '>= 1.7.0'
 
 group :test do
   #...

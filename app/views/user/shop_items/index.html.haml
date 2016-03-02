@@ -13,7 +13,7 @@
   %h3= "#{date.strftime("%A")}"
   - shop_items_for_day.each do |shop_item|
     %tr
-      %td= shop_item.purchase_date
+      %td= shop_item.purchased_on
       %td= shop_item.decorate.price
       %td= shop_item.name
       %td= shop_item.currency.name
@@ -46,9 +46,9 @@
     %th Expense group
     %th Actions
   %h3 All planned expenses
-  - shop_items.sort_by(&:purchase_date).each do |shop_item|
+  - shop_items.order(:purchased_on).each do |shop_item|
     %tr
-      %td= shop_item.purchase_date
+      %td= shop_item.purchased_on
       %td= shop_item.decorate.price
       %td= shop_item.name
       %td= shop_item.currency.name

@@ -34,7 +34,7 @@ class User::ShopItemsController < User::UserController
                                     :expenses_group_id,
                                     :name,
                                     :price_value,
-                                    :purchase_date,
+                                    :purchased_on,
                                     :shop_id)
   end
 
