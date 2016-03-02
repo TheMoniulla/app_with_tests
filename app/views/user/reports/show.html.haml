@@ -31,8 +31,8 @@
     %td
     %td
 
-- expenses_by_group.each_pair do |group_id, expenses|
-  %h3=ExpensesGroup.find(group_id).name
+- expenses_by_group.each_pair do |group, expenses|
+  %h3=group.name
   %table.table.table-striped
     %tr
       %th Name

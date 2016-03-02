@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def total_price_for_group(expenses)
-    expenses.map(&:price_value).reduce(&:+)
+    expenses.to_a.sum(&:price_value)
   end
 end
