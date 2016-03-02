@@ -10,4 +10,8 @@ module ApplicationHelper
   def total_price_for_group(expenses)
     expenses.to_a.sum(&:price_value)
   end
+
+  def percentage_usage(expense, expenses)
+    "#{price(expense.price_value * 100 / total_price_for_group(expenses))} %"
+  end
 end

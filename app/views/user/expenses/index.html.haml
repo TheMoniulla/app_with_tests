@@ -36,7 +36,7 @@
 |
 = link_to "#{name_of_week(date + 1.week)}", user_expenses_path(date: (date + 1.week).strftime('%Y-%m-%d'))
 
-= link_to 'Send weekly report', send_expenses_mail_user_expenses_path(date: date.strftime('%Y-%m-%d')), class: 'btn btn-success'
+= link_to 'Send weekly report', send_expenses_mail_user_expenses_path(date: date.strftime('%Y-%m-%d')), class: 'btn btn-info pull-right'
 - expenses_groups.each do |expenses_group|
   %h3= expenses_group.name
   %table.table.table-striped
@@ -46,6 +46,7 @@
       %th Currency
       %th Description
       %th Shop
+      %th Value %
     - expenses_group.expenses.for_user(current_user).each do |expense|
       %tr
         %td= expense.name
@@ -53,10 +54,12 @@
         %td= expense.currency.name
         %td= expense.decorate.description_for_display
         %td= expense.shop.name
+        %td= percentage_usage(expense, expenses_group.expenses.for_user(current_user))
     %tr
       %td TOTAL PRICE
       %td
         %b= price(expenses_group.total_price_for_user(current_user))
+      %td
       %td
       %td
       %td
