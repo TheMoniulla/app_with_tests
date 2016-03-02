@@ -1,6 +1,8 @@
 = simple_form_for q, url: user_report_path(group.id), method: :get do |f|
-  = f.input :name_cont
-  = f.input :user_email_cont
+  = f.input :name_cont, label: 'Name'
+  = f.input :price_value_gteq, label: 'Price min'
+  = f.input :price_value_lteq, label: 'Price max'
+  = f.input :user_email_cont, label: 'Email'
   = f.submit
 
 %h1=group.name
