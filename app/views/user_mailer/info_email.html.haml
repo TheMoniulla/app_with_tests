@@ -8,7 +8,7 @@
       =@user.email
 
     %p Your weekly expenses:
-    %b=@user.total_price_for_week(Date.today)
+    %b=@user.total_price_for_week(@date)
 
     %p
-    =@user.compare_expenses_to_last_week(Date.today)
+    =@user.compare_expenses_to_last_week(@date)

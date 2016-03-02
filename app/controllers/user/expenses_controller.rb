@@ -30,7 +30,8 @@ class User::ExpensesController < User::UserController
 
   def send_expenses_mail
     @user = current_user
-    UserMailer.info_email(@user).deliver
+    @date = date
+    UserMailer.info_email(@user, @date).deliver
     redirect_to user_expenses_path
   end
 
