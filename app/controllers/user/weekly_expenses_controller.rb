@@ -10,4 +10,13 @@ class User::WeeklyExpensesController < User::UserController
     UserMailer.info_email(@user, @date).deliver
     redirect_to user_weekly_expenses_path
   end
+
+  def index
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'weekly_report', layout: "pdf.html.haml"
+      end
+    end
+  end
 end
