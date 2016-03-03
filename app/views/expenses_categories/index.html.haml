@@ -11,5 +11,5 @@
       %td= category.name
       %td= category.description
       %td
-        = link_to 'Edit', edit_expenses_category_path(expenses_category.id)
-        = link_to 'Delete', expenses_category_path(expenses_category.id), method: :delete, data: {confirm: 'Are you sure?'}
+        = link_to 'Edit', edit_expenses_category_path(category.id)
+        = link_to 'Delete', expenses_category_path(category.id), method: :delete, data: {confirm: 'Are you sure?'}

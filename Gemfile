@@ -48,6 +48,7 @@ gem 'decent_decoration', '>= 0.0.6'
 gem 'ransack', '>= 1.7.0'
 gem 'wicked_pdf', '>= 1.0.4'
 gem 'wkhtmltopdf-binary', '>= 0.9.9.3'
+gem 'roo', '~> 2.3.2'
 
 group :test do
   #...

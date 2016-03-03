@@ -4,6 +4,7 @@ class User::ExpensesController < User::UserController
   expose(:expenses) { current_user.expenses }
   expose_decorated(:expense, attributes: :expense_params)
   expose(:expenses_categories) { ExpensesCategory.all }
+  expose(:expenses_import) { ExpensesImport.new }
 
   def create
     if expense.save
@@ -24,6 +25,19 @@ class User::ExpensesController < User::UserController
   def destroy
     expense.destroy
     redirect_to user_expenses_path
+  end
+
+  def import
+    if params[:expenses_import] && params[:expenses_import][:file]
+      begin
+        ExpensesImport.new(params[:expenses_import][:file]).import_for(current_user)
+        redirect_to user_expenses_path, notice: 'Success.'
+      rescue
+        redirect_to user_expenses_path, alert: 'Wrong data format.'
+      end
+    else
+      redirect_to user_expenses_path, alert: 'You have to upload file.'
+    end
   end
 
   private

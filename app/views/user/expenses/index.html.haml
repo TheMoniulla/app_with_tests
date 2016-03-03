@@ -2,6 +2,10 @@
 %p= link_to 'New expense', new_user_expense_path, class: 'btn btn-success'
 %p= link_to 'Weekly expenses', user_weekly_expenses_path, class: 'btn btn-info'
 
+= simple_form_for expenses_import, as: :expenses_import, url: import_user_expenses_path do |f|
+  = f.input :file, as: :file
+  = f.submit
+
 %table.table.table-striped
   %tr
     %th Name
