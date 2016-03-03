@@ -6,25 +6,27 @@ Rails.application.routes.draw do
   resource :home, only: :show, controller: :home
 
   namespace :user do
-    resources :expenses do
+    resources :expenses
+    resources :weekly_expenses, only: :index do
       collection do
         get :send_expenses_mail
       end
     end
-    resources :reports, only: [:show, :index]
+    resources :groups_expenses, only: [:show, :index]
+    resources :weekly_groups_expenses, only: [:index, :show]
     resources :shop_items, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
   resources :currencies, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :groups
-  resources :expenses_groups, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :expenses_categories, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :shops, only: [:index, :new, :create, :edit, :update, :destroy]
 
   namespace :api do
     namespace :v1 do
       resources :currencies, only: [:index, :show, :create, :update, :destroy]
       resources :expenses, only: [:index, :show, :create, :update, :destroy]
-      resources :expenses_groups, only: [:index, :show, :create, :update, :destroy]
+      resources :expenses_categories, only: [:index, :show, :create, :update, :destroy]
       resources :groups, only: [:index, :show, :create, :update, :destroy]
       resources :shops, only: [:index, :show, :create, :update, :destroy]
     end

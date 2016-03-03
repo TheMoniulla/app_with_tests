@@ -8,7 +8,7 @@
     %th Name
     %th Currency
     %th Shop
-    %th Expense group
+    %th Category
     %th Actions
   %h3= "#{date.strftime("%A")}"
   - shop_items_for_day.each do |shop_item|
@@ -18,7 +18,7 @@
       %td= shop_item.name
       %td= shop_item.currency.name
       %td= shop_item.shop.name
-      %td= shop_item.expenses_group.name
+      %td= shop_item.expenses_category.name
       %td
         = link_to 'Edit', edit_user_shop_item_path(shop_item.id)
         = link_to 'Delete', user_shop_item_path(shop_item.id), method: :delete, data: {confirm: 'Are you sure?'}
@@ -43,7 +43,7 @@
     %th Name
     %th Currency
     %th Shop
-    %th Expense group
+    %th Category
     %th Actions
   %h3 All planned expenses
   - shop_items.order(:purchased_on).each do |shop_item|
@@ -53,7 +53,7 @@
       %td= shop_item.name
       %td= shop_item.currency.name
       %td= shop_item.shop.name
-      %td= shop_item.expenses_group.name
+      %td= shop_item.expenses_category.name
       %td
         = link_to 'Edit', edit_user_shop_item_path(shop_item.id)
         = link_to 'Delete', user_shop_item_path(shop_item.id), method: :delete, data: {confirm: 'Are you sure?'}

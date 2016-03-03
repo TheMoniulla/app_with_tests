@@ -4,7 +4,7 @@ describe 'expenses', type: :feature do
   before do
     create(:shop, name: 'Awesome shop')
     create(:currency, name: 'PLN')
-    create(:expenses_group, name: 'Great group')
+    create(:expenses_category, name: 'Great category')
   end
   let!(:user) { FactoryGirl.create(:user) }
 
@@ -21,7 +21,7 @@ describe 'expenses', type: :feature do
       fill_in 'Description', with: 'description'
       select 'PLN', from: 'Currency'
       select 'Awesome shop', from: 'Shop'
-      select 'Great group', from: 'Expenses group'
+      select 'Great category', from: 'Expenses category'
     end
     expect { click_button 'Create Expense' }.to change { Expense.count }.by 1
     expect(page).to have_content 'New expense'

@@ -1,4 +1,4 @@
-class ExpensesGroup < ActiveRecord::Base
+class ExpensesCategory < ActiveRecord::Base
   has_many :expenses
   has_many :shop_items
 

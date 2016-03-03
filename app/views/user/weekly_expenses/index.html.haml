@@ -1,0 +1,32 @@
+%h1 Weekly report
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Price
+    %th Currency
+    %th Description
+    %th Shop
+    %th Category
+  %h3= "#{name_of_week(date)}: #{date.beginning_of_week} - #{date.end_of_week}"
+  - expenses_for_week.each do |expense|
+    %tr
+      %td= expense.name
+      %td= expense.decorate.price
+      %td= expense.currency.name
+      %td= expense.decorate.description_for_display
+      %td= expense.shop.name
+      %td= expense.expenses_category.name
+  %tr
+    %td TOTAL PRICE
+    %td
+      %b= price(current_user.total_price_for_week(date))
+    %td
+    %td
+    %td
+    %td
+= link_to "#{name_of_week(date - 1.week)}", user_weekly_expenses_path(date: (date - 1.week).strftime('%Y-%m-%d'))
+|
+= link_to "#{name_of_week(date + 1.week)}", user_weekly_expenses_path(date: (date + 1.week).strftime('%Y-%m-%d'))
+
+= link_to 'Send weekly report', send_expenses_mail_user_weekly_expenses_path(date: date.strftime('%Y-%m-%d')), class: 'btn btn-info pull-right'

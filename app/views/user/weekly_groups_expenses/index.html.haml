@@ -1,0 +1,4 @@
+%h1 Weekly reports
+- groups.each do |group|
+  %h4
+    %li=link_to "#{group.name}", user_weekly_groups_expense_path(group.id)

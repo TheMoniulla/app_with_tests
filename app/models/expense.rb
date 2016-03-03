@@ -1,5 +1,5 @@
 class Expense < ActiveRecord::Base
-  belongs_to :expenses_group
+  belongs_to :expenses_category
   belongs_to :currency
   belongs_to :shop
   belongs_to :user
@@ -9,7 +9,7 @@ class Expense < ActiveRecord::Base
   scope :for_group, -> (group) { where(user_id: group.user_ids) }
 
   validates :currency_id,
-            :expenses_group_id,
+            :expenses_category_id,
             :name,
             :price_value,
             :shop_id,

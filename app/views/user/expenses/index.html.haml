@@ -1,5 +1,6 @@
 %h1 Expenses
 %p= link_to 'New expense', new_user_expense_path, class: 'btn btn-success'
+%p= link_to 'Weekly expenses', user_weekly_expenses_path, class: 'btn btn-info'
 
 %table.table.table-striped
   %tr
@@ -8,17 +9,16 @@
     %th Currency
     %th Description
     %th Shop
-    %th Expense group
+    %th Category
     %th Actions
-  %h3= "#{name_of_week(date)}: #{date.beginning_of_week} - #{date.end_of_week}"
-  - expenses_for_week.each do |expense|
+  - expenses.each do |expense|
     %tr
       %td= expense.name
       %td= expense.decorate.price
       %td= expense.currency.name
       %td= expense.decorate.description_for_display
       %td= expense.shop.name
-      %td= expense.expenses_group.name
+      %td= expense.expenses_category.name
       %td
         = link_to 'Show', user_expense_path(expense.id)
         = link_to 'Edit', edit_user_expense_path(expense.id)
@@ -26,19 +26,15 @@
   %tr
     %td TOTAL PRICE
     %td
-      %b= price(current_user.total_price_for_week(date))
+      %b= price(total_price(expenses))
     %td
     %td
     %td
     %td
     %td
-= link_to "#{name_of_week(date - 1.week)}", user_expenses_path(date: (date - 1.week).strftime('%Y-%m-%d'))
-|
-= link_to "#{name_of_week(date + 1.week)}", user_expenses_path(date: (date + 1.week).strftime('%Y-%m-%d'))
 
-= link_to 'Send weekly report', send_expenses_mail_user_expenses_path(date: date.strftime('%Y-%m-%d')), class: 'btn btn-info pull-right'
-- expenses_groups.each do |expenses_group|
-  %h3= expenses_group.name
+- expenses_categories.each do |category|
+  %h3= category.name
   %table.table.table-striped
     %tr
       %th Name
@@ -47,18 +43,18 @@
       %th Description
       %th Shop
       %th Value %
-    - expenses_group.expenses.for_user(current_user).each do |expense|
+    - category.expenses.for_user(current_user).each do |expense|
       %tr
         %td= expense.name
         %td= expense.decorate.price
         %td= expense.currency.name
         %td= expense.decorate.description_for_display
         %td= expense.shop.name
-        %td= percentage_usage(expense, expenses_group.expenses.for_user(current_user))
+        %td= percentage_usage(expense, category.expenses.for_user(current_user))
     %tr
       %td TOTAL PRICE
       %td
-        %b= price(expenses_group.total_price_for_user(current_user))
+        %b= price(category.total_price_for_user(current_user))
       %td
       %td
       %td

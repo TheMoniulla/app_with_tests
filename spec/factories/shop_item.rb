@@ -6,6 +6,6 @@ FactoryGirl.define do
     currency_id { create(:currency).id }
     user_id { create(:user).id }
     shop_id { create(:shop).id }
-    expenses_group_id { create(:expenses_group).id }
+    expenses_category_id { create(:expenses_category).id }
   end
 end

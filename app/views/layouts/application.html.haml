@@ -8,12 +8,16 @@
   %body
     - if current_user
       = link_to 'Expenses', user_expenses_path
-      = link_to 'Currencies', currencies_path
-      = link_to 'Groups', groups_path
-      = link_to 'Reports', user_reports_path
-      = link_to 'Shops', shops_path
+      = link_to 'Weekly expenses', user_weekly_expenses_path
       = link_to 'Shop lists', user_shop_items_path
-      = link_to 'Expense_Group', expenses_groups_path
+      = link_to 'Groups Expenses', user_groups_expenses_path
+      = link_to 'Weekly Groups Expenses', user_weekly_groups_expenses_path
+      |
+      = link_to 'Groups', groups_path
+      = link_to 'Currencies', currencies_path
+      = link_to 'Expenses Categories', expenses_categories_path
+      = link_to 'Shops', shops_path
+      |
       = link_to 'Sign out', destroy_user_session_path, method: :delete
     - else
       = link_to 'Sign in', new_user_session_path

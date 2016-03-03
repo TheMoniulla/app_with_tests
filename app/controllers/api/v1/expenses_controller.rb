@@ -38,7 +38,7 @@ class Api::V1::ExpensesController < ApplicationController
   def expense_params
     params.require(:expense).permit(:currency_id,
                                     :description,
-                                    :expenses_group_id,
+                                    :expenses_category_id,
                                     :name,
                                     :price_value,
                                     :shop_id,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302090634) do
+ActiveRecord::Schema.define(version: 20160303091543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20160302090634) do
   create_table "expenses", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "expenses_group_id"
+    t.integer  "expenses_category_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160302090634) do
     t.integer  "currency_id"
   end
 
-  create_table "expenses_groups", force: :cascade do |t|
+  create_table "expenses_categories", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 20160302090634) do
   create_table "shop_items", force: :cascade do |t|
     t.string   "name"
     t.date     "purchased_on"
-    t.decimal  "price_value",       precision: 8, scale: 2
+    t.decimal  "price_value",          precision: 8, scale: 2
     t.integer  "shop_id"
-    t.integer  "expenses_group_id"
+    t.integer  "expenses_category_id"
     t.integer  "currency_id"
     t.integer  "user_id"
     t.datetime "created_at"

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User::ReportsController do
+describe User::GroupsExpensesController do
   let(:user) { create(:user) }
   before { sign_in(user) }
 

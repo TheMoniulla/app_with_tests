@@ -1,7 +1,7 @@
 class ShopItem < ActiveRecord::Base
   belongs_to :currency
   belongs_to :shop
-  belongs_to :expenses_group
+  belongs_to :expenses_category
   belongs_to :user
 
   scope :for_day, -> (date) { where(purchased_on: date) }

@@ -7,11 +7,11 @@ module ApplicationHelper
     "Week no. #{date.strftime("%U")}"
   end
 
-  def total_price_for_group(expenses)
+  def total_price(expenses)
     expenses.to_a.sum(&:price_value)
   end
 
   def percentage_usage(expense, expenses)
-    "#{price(expense.price_value * 100 / total_price_for_group(expenses))} %"
+    "#{price(expense.price_value * 100 / total_price(expenses))} %"
   end
 end

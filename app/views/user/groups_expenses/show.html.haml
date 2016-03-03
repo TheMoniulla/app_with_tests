@@ -1,4 +1,4 @@
-= simple_form_for q, url: user_report_path(group.id), method: :get do |f|
+= simple_form_for q, url: user_groups_expense_path(group.id), method: :get do |f|
   = f.input :name_cont, label: 'Name'
   = f.input :price_value_gteq, label: 'Price min'
   = f.input :price_value_lteq, label: 'Price max'
@@ -6,6 +6,7 @@
   = f.submit
 
 %h1=group.name
+%p= link_to 'Weekly expenses', user_weekly_groups_expenses_path, class: 'btn btn-info'
 
 %table.table.table-striped
   %tr
@@ -14,38 +15,7 @@
     %th Currency
     %th Description
     %th Shop
-    %th User
-  %h2= "#{name_of_week(date)}: #{date.beginning_of_week} - #{date.end_of_week}"
-  - expenses_for_week.each do |expense|
-    %tr
-      %td= expense.name
-      %td= expense.decorate.price
-      %td= expense.currency.name
-      %td= expense.decorate.description_for_display
-      %td= expense.shop.name
-      %td= expense.user.email
-  %tr
-    %td TOTAL PRICE
-    %td
-      %b= price(total_price_for_group(expenses_for_week))
-    %td
-    %td
-    %td
-    %td
-    %td
-= link_to "#{name_of_week(date - 1.week)}", user_report_path(date: (date - 1.week).strftime('%Y-%m-%d'))
-|
-= link_to "#{name_of_week(date + 1.week)}", user_report_path(date: (date + 1.week).strftime('%Y-%m-%d'))
-
-%h2
-  All expenses per group
-%table.table.table-striped
-  %tr
-    %th Name
-    %th Price
-    %th Currency
-    %th Description
-    %th Shop
+    %th Category
     %th User
     %th Value %
   - expenses.each do |expense|
@@ -55,19 +25,20 @@
       %td= expense.currency.name
       %td= expense.decorate.description_for_display
       %td= expense.shop.name
+      %td= expense.expenses_category.name
       %td= expense.user.email
       %td= percentage_usage(expense, expenses)
   %tr
     %td TOTAL PRICE
     %td
-      %b= price(total_price_for_group(expenses))
+      %b= price(total_price(expenses))
     %td
     %td
     %td
     %td
     %td
 
-- expenses_by_group.each_pair do |group, expenses|
+- expenses_by_category.each_pair do |group, expenses|
   %h3=group.name
   %table.table.table-striped
     %tr
@@ -90,7 +61,7 @@
     %tr
       %td TOTAL PRICE
       %td
-        %b= price(total_price_for_group(expenses))
+        %b= price(total_price(expenses))
       %td
       %td
       %td
