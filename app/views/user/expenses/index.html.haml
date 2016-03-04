@@ -1,3 +1,42 @@
+:javascript
+  $(function () {
+    $('#expenses_chart').highcharts({
+        chart: {
+          type: 'column'
+        },
+        title: {
+          text: 'All expenses'
+        },
+        xAxis: {
+          categories: #{expenses_categories.map(&:name)},
+          title: { text:'Categories' }
+          },
+        yAxis: {
+          min: 0,
+          title: {
+            text: 'Price value'
+          }
+        },
+        tooltip: {
+          headerFormat: '<b>{point.x}</b><br/>',
+          pointFormat: '{series.name}: {point.y}'
+        },
+        plotOptions: {
+          column: {
+            stacking: 'normal'
+          }
+        },
+        series: [
+
+        {
+          name: 'Price',
+          data: #{total_price_category}
+        }]
+      });
+    });
+
+#expenses_chart{:style => "min-width: 310px; height: 400px; margin: 0 auto"};
+
 %h1 Expenses
 %p= link_to 'New expense', new_user_expense_path, class: 'btn btn-success'
 %p= link_to 'Weekly expenses', user_weekly_expenses_path, class: 'btn btn-info'

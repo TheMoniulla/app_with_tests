@@ -5,6 +5,9 @@ class User::ExpensesController < User::UserController
   expose_decorated(:expense, attributes: :expense_params)
   expose(:expenses_categories) { ExpensesCategory.all }
   expose(:expenses_import) { ExpensesImport.new }
+  expose(:total_price_category) do
+    expenses_categories.map { |category| category.expenses.for_user(current_user).sum(:price_value).to_f }
+  end
 
   def create
     if expense.save
