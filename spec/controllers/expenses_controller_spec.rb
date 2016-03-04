@@ -163,4 +163,8 @@ describe User::ExpensesController do
       end
     end
   end
+
+  describe 'expose expenses_categories' do
+    it { expect(controller.expenses_categories).to eq ExpensesCategory.all }
+  end
 end

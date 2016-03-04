@@ -137,4 +137,17 @@ describe User::ShopItemsController do
       end
     end
   end
+
+  describe 'decent exposure' do
+    describe 'date' do
+      it { expect(controller.date).to eq Date.today }
+    end
+
+    describe 'shop_items_for_day' do
+      let(:shop_item) { create(:shop_item, user: user)}
+      let(:date) { Date.today }
+
+      it { expect(controller.shop_items_for_day).to eq [shop_item] }
+    end
+  end
 end

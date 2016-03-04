@@ -107,5 +107,3 @@ describe CurrenciesController do
     end
   end
 end
-
-

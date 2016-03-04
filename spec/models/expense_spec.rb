@@ -8,10 +8,10 @@ describe Expense do
   it { is_expected.to belong_to(:shop) }
   it { is_expected.to belong_to(:user) }
 
-  it { expect(subject).to validate_presence_of :currency_id }
-  it { expect(subject).to validate_presence_of :expenses_category_id }
-  it { expect(subject).to validate_presence_of :name }
-  it { expect(subject).to validate_presence_of :price_value }
-  it { expect(subject).to validate_presence_of :shop_id }
-  it { expect(subject).to validate_presence_of :user_id }
+  it { is_expected.to validate_presence_of :currency_id }
+  it { is_expected.to validate_presence_of :expenses_category_id }
+  it { is_expected.to validate_presence_of :name }
+  it { is_expected.to validate_presence_of :price_value }
+  it { is_expected.to validate_presence_of :shop_id }
+  it { is_expected.to validate_presence_of :user_id }
 end
