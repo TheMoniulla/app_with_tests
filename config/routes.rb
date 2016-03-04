@@ -17,7 +17,11 @@ Rails.application.routes.draw do
       end
     end
     resources :groups_expenses, only: [:show, :index]
-    resources :weekly_groups_expenses, only: [:index, :show]
+    resources :weekly_groups_expenses, only: [:index, :show] do
+      member do
+        get :send_group_expenses_mail
+      end
+    end
     resources :shop_items, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
