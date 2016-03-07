@@ -29,6 +29,6 @@
 |
 = link_to "#{name_of_week(date + 1.week)}", user_weekly_expenses_path(date: (date + 1.week).strftime('%Y-%m-%d'))
 
-= link_to 'Send weekly report', send_expenses_mail_user_weekly_expenses_path(date: date.strftime('%Y-%m-%d')), class: 'btn btn-success pull-right'
+= link_to 'Send weekly report', send_expenses_mail_user_weekly_expenses_mails_path(date: date.strftime('%Y-%m-%d')), class: 'btn btn-success pull-right'
 
 = link_to 'Create PDF', user_weekly_expenses_path(date: date.strftime('%Y-%m-%d'), format: :pdf), class: 'btn btn-info pull-right'

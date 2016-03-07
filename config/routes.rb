@@ -11,13 +11,15 @@ Rails.application.routes.draw do
         post :import
       end
     end
-    resources :weekly_expenses, only: :index do
+    resources :weekly_expenses, only: :index
+    resources :weekly_expenses_mails do
       collection do
         get :send_expenses_mail
       end
     end
     resources :groups_expenses, only: [:show, :index]
-    resources :weekly_groups_expenses, only: [:index, :show] do
+    resources :weekly_groups_expenses, only: [:index, :show]
+    resources :weekly_groups_expenses_mails do
       member do
         get :send_group_expenses_mail
       end
