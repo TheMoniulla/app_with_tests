@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Welcome
+      =@user.email
+
+    %p
+      Your planned expenses for
+      ="#{@date}:"
+
+    %table.table
+      %tr
+        %th Name
+        %th Price
+        %th Currency
+        %th Shop
+        %th Category
+      - @shop_items_for_day.each do |shop_item|
+        %tr
+          %td= shop_item.name
+          %td= shop_item.decorate.price
+          %td= shop_item.currency.name
+          %td= shop_item.shop.name
+          %td= shop_item.expenses_category.name
+      %tr
+        %td
+          %b TOTAL PRICE
+        %td
+          %b= @shop_items_for_day.to_a.sum(&:price_value)
+        %td
+        %td
+        %td
