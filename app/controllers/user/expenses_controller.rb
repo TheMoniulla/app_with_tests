@@ -50,6 +50,7 @@ class User::ExpensesController < User::UserController
                                     :description,
                                     :expenses_category_id,
                                     :name,
+                                    :photo,
                                     :price_value,
                                     :shop_id)
   end

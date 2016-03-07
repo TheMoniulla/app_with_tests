@@ -9,6 +9,6 @@ class GroupMailer < ApplicationMailer
     @date = date
     @group = group
     @expenses_for_week = expenses_for_week
-    mail(to: group.users.map(&:email), subject: 'Weekly report of group expenses')
+    mail(to: group.users.pluck(:email), subject: 'Weekly report of group expenses')
   end
 end
