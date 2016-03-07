@@ -31,7 +31,7 @@ class User::ShopItemsController < User::UserController
 
   def shop_item_params
     params.require(:shop_item).permit(:currency_id,
-                                    :expenses_group_id,
+                                    :expenses_category_id,
                                     :name,
                                     :price_value,
                                     :purchased_on,

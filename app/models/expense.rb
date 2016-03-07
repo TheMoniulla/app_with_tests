@@ -4,7 +4,7 @@ class Expense < ActiveRecord::Base
   belongs_to :shop
   belongs_to :user
 
-  has_attached_file :photo
+  has_attached_file :photo, styles: {thumb: "50x50>"}, default_url: "/assets/photos/:style/missing.png"
 
   validates_attachment :photo,
                        content_type: {content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"]}

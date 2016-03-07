@@ -94,7 +94,7 @@
         %td= expense.currency.name
         %td= expense.decorate.description_for_display
         %td= expense.shop.name
-        %td= image_tag expense.photo.url
+        %td= image_tag expense.photo.url(:thumb), size: '50x50'
         %td= percentage_usage(expense, category.expenses.for_user(current_user))
     %tr
       %td TOTAL PRICE

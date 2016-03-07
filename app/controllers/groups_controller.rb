@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :check_ownership, only: [:show, :edit, :update, :destroy]
+  before_action :check_access_to_group, only: [:show, :edit, :update, :destroy]
   expose(:groups) { current_user.owned_groups }
   expose_decorated(:group, attributes: :group_params)
 
@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name, user_ids: [])
   end
 
-  def check_ownership
+  def check_access_to_group
     begin
       group
     rescue
