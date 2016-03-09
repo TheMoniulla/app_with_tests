@@ -55,7 +55,7 @@
     %th Category
     %th Actions
   - expenses.each do |expense|
-    %tr
+    %tr{id: "expense_#{expense.id}"}
       %td= expense.name
       %td= expense.decorate.price
       %td= expense.currency.name
@@ -65,7 +65,7 @@
       %td
         = link_to 'Show', user_expense_path(expense.id)
         = link_to 'Edit', edit_user_expense_path(expense.id)
-        = link_to 'Delete', user_expense_path(expense.id), method: :delete, remote: true, class: 'delete_expense',  data: {confirm: 'Are you sure?'}
+        = link_to 'Delete', user_expense_path(expense.id), method: :delete, remote: true, data: {confirm: 'Are you sure?'}
   %tr
     %td TOTAL PRICE
     %td

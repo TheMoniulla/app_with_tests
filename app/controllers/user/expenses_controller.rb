@@ -29,8 +29,7 @@ class User::ExpensesController < User::UserController
     expense.destroy
     respond_to do |format|
       format.html { redirect_to user_expenses_path }
-      format.json { head :no_content }
-      format.js   { render :layout => false }
+      format.js
     end
   end
 
