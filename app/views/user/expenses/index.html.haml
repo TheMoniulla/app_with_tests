@@ -65,7 +65,7 @@
       %td
         = link_to 'Show', user_expense_path(expense.id)
         = link_to 'Edit', edit_user_expense_path(expense.id)
-        = link_to 'Delete', user_expense_path(expense.id), method: :delete, data: {confirm: 'Are you sure?'}
+        = link_to 'Delete', user_expense_path(expense.id), method: :delete, remote: true, class: 'delete_expense',  data: {confirm: 'Are you sure?'}
   %tr
     %td TOTAL PRICE
     %td

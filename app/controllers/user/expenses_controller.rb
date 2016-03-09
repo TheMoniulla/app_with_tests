@@ -27,7 +27,11 @@ class User::ExpensesController < User::UserController
 
   def destroy
     expense.destroy
-    redirect_to user_expenses_path
+    respond_to do |format|
+      format.html { redirect_to user_expenses_path }
+      format.json { head :no_content }
+      format.js   { render :layout => false }
+    end
   end
 
   def import
