@@ -51,7 +51,7 @@ gem 'wkhtmltopdf-binary', '>= 0.9.9.3'
 gem 'roo', '~> 2.3.2'
 gem "highcharts-rails", '>= 4.1.9'
 gem "paperclip", '~> 4.3'
-gem 'rails_db_sql', '~> 0.0.2'
+gem 'rails_db_sql', git: 'https://github.com/tb/rails_db_sql'
 gem 'sidekiq', '~> 4.1.1'
 
 group :test do
