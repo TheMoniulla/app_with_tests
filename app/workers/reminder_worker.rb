@@ -2,7 +2,7 @@ class ReminderWorker
   include Sidekiq::Worker
 
   def perform
-    User.all.each do |user|
+    User.find_each do |user|
       ReminderMailer.reminder_email(user).deliver
     end
   end

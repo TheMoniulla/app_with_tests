@@ -301,7 +301,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   selleo-controller_tests
   shoulda-matchers
-  sidekiq
+  sidekiq (~> 4.1.1)
   simple_form (>= 3.2.1)
   spring
   sqlite3
