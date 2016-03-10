@@ -3,9 +3,8 @@ require 'rails_helper'
 describe UserMailer do
   describe 'info_email' do
     let(:user) { create(:user, email: 'user@user.com' ) }
-    let(:date) { Date.today }
-    let(:date_as_string) { date.to_s }
-    let(:mail) { UserMailer.info_email(user, date_as_string) }
+    let(:date_as_string) { '2016-03-10' }
+    let(:mail) { UserMailer.info_email(user.id, date_as_string) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq('Weekly report of your expenses')
