@@ -4,7 +4,8 @@ describe UserMailer do
   describe 'info_email' do
     let(:user) { create(:user, email: 'user@user.com' ) }
     let(:date) { Date.today }
-    let(:mail) { UserMailer.info_email(user, date) }
+    let(:date_as_string) { date.to_s }
+    let(:mail) { UserMailer.info_email(user, date_as_string) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq('Weekly report of your expenses')
