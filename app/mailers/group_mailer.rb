@@ -5,10 +5,10 @@ class GroupMailer < ApplicationMailer
     expenses.to_a.sum(&:price_value)
   end
 
-  def group_info_email(date, group, expenses_for_week)
-    @date = date
-    @group = group
-    @expenses_for_week = expenses_for_week
-    mail(to: group.users.pluck(:email), subject: 'Weekly report of group expenses')
+  def group_info_email(date_as_string, group_id)
+    @group = Group.find(group_id)
+    @date = Date.parse(date_as_string)
+    @expenses_for_week = Expense.for_group(@group).for_week(@date)
+    mail(to: @group.users.pluck(:email), subject: 'Weekly report of group expenses')
   end
 end

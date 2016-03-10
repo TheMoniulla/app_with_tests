@@ -17,7 +17,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger.
-  config.active_support.deprecation = :log
+  config.active_support.deprecation = :jobs
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
@@ -40,5 +40,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  config.action_mailer.smtp_settings = {
+      :address => "localhost",
+      :port => 1025
+  }
 end

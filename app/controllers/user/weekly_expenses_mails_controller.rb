@@ -3,7 +3,7 @@ class User::WeeklyExpensesMailsController < User::UserController
   expose(:date) { params[:date] ? Date.parse(params[:date]) : Date.today }
 
   def send_expenses_mail
-    UserMailer.info_email(user, date).deliver
-    redirect_to user_weekly_expenses_path
+    MailerJob.perform_later(user.id, date.to_s)
+    redirect_to :back
   end
 end

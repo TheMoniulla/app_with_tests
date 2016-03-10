@@ -53,6 +53,7 @@ gem "highcharts-rails", '>= 4.1.9'
 gem "paperclip", '~> 4.3'
 gem 'rails_db_sql', git: 'https://github.com/tb/rails_db_sql'
 gem 'sidekiq', '~> 4.1.1'
+gem 'delayed_job_active_record', '>= 4.1.0'
 
 group :test do
   #...
