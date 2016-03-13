@@ -42,7 +42,7 @@ gem 'pry', '>= 0.10.3'
 gem 'devise', '>= 3.5.6'
 gem 'decent_exposure', '>= 2.3.3'
 gem 'draper', '>= 1.4.0', require: false
-gem 'letter_opener', '>= 1.4.1', group: :development
+gem 'letter_opener', '>= 1.4.1', :group => :development
 gem 'active_model_serializers', '>= 0.9.4'
 gem 'decent_decoration', '>= 0.0.6'
 gem 'ransack', '>= 1.7.0'
@@ -54,6 +54,13 @@ gem "paperclip", '~> 4.3'
 gem 'rails_db_sql', git: 'https://github.com/tb/rails_db_sql'
 gem 'sidekiq', '~> 4.1.1'
 gem 'delayed_job_active_record', '>= 4.1.0'
+gem 'figaro'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'twitter'
+gem 'omniauth-google-oauth2'
+gem 'google-api-client', require: 'google/api_client'
 
 group :test do
   #...
