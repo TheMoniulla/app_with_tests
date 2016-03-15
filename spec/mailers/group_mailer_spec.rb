@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe GroupMailer do
-  describe 'group_info_email' do
+  describe '#group_info_email' do
     let(:group) { create(:group, name: 'ABC') }
     let(:user_1) { create(:user, email: 'user1@user.com') }
     let(:user_2) { create(:user, email: 'user2@user.com') }

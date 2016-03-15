@@ -1,11 +1,5 @@
-class ExpensesImport
+class ExpensesImport < Struct.new(:file)
   require 'roo'
-
-  attr_accessor :file
-
-  def initialize(file = nil)
-    @file = file
-  end
 
   def import_for(user)
     spreadsheet = open_spreadsheet(file)
