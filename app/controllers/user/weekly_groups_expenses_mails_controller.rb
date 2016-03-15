@@ -6,7 +6,7 @@ class User::WeeklyGroupsExpensesMailsController < User::UserController
   expose(:date) { params[:date] ? Date.parse(params[:date]) : Date.today }
 
   def send_group_expenses_mail
-    GroupMailer.group_info_email(date.to_s, group.id).deliver
+    GroupMailerWorker.perform_async(date.to_s, group.id)
     redirect_to :back
   end
 end
