@@ -53,7 +53,6 @@ gem "highcharts-rails", '>= 4.1.9'
 gem "paperclip", '~> 4.3'
 gem 'rails_db_sql', git: 'https://github.com/tb/rails_db_sql'
 gem 'sidekiq', '~> 4.1.1'
-gem 'delayed_job_active_record', '>= 4.1.0'
 gem 'figaro', '>= 1.1.1'
 gem 'omniauth', '>= 1.3.1'
 gem 'omniauth-twitter', '>= 1.2.1'
@@ -76,6 +75,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'faker', '>= 1.6.3'
 end
 
 group :development do
