@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20160313220542) do
 
   create_table "expenses", force: :cascade do |t|
     t.string   "name"
+    t.decimal  "price_value",          precision: 8, scale: 2
     t.text     "description"
     t.integer  "expenses_category_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "shop_id"
-    t.decimal  "price_value"
     t.integer  "currency_id"
     t.string   "photo_file_name"
     t.string   "photo_content_type"

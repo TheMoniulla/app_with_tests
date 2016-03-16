@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, class_name: 'FormUser',
+  devise_for :users, class_name: 'User',
              controllers: {omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'}
 
   devise_scope :user do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'the sign up process', type: :feature do
   it 'signs me up when data is correct' do
-    visit 'user/sign_up'
+    visit 'users/sign_up'
     within('#new_user') do
       fill_in 'Email', with: 'user@example.com'
       fill_in 'Password', with: 'password'
@@ -13,7 +13,7 @@ describe 'the sign up process', type: :feature do
   end
 
   it 'show error when data is not correct' do
-    visit 'user/sign_up'
+    visit 'users/sign_up'
     within('#new_user') do
       fill_in 'Email', with: 'user@example.com'
       fill_in 'Password', with: 'password'

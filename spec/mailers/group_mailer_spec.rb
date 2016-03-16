@@ -6,8 +6,10 @@ describe GroupMailer do
     let(:user_1) { create(:user, email: 'user1@user.com') }
     let(:user_2) { create(:user, email: 'user2@user.com') }
     let(:user_3) { create(:user, email: 'user3@user.com') }
-    let(:date_as_string) { '2016-03-10' }
-    let(:mail) { GroupMailer.group_info_email(date_as_string, group.id) }
+    let(:date) { '2016-03-16' }
+    let(:expenses) { Expense.for_group(group) }
+    let(:expenses_for_week) { expenses.for_week(Date.parse(date)) }
+    let(:mail) { GroupMailer.group_info_email(date, group.id) }
 
     before do
       group.users = [user_1, user_2]
@@ -32,10 +34,6 @@ describe GroupMailer do
       expect(mail.body.encoded).to match('ABC')
     end
 
-    it "includes dates in email's body" do
-      expect(mail.body.encoded).to match('2016-03-07 - 2016-03-13')
-    end
-
     context 'expneses exists' do
       let!(:expense_1) { create(:expense, name: 'Macbook Pro', price_value: 5000, user: user_1) }
       let!(:expense_2) { create(:expense, name: 'Xperia Z3', price_value: 1600, user: user_2) }
@@ -51,6 +49,10 @@ describe GroupMailer do
 
       it "includes total price in email's body" do
         expect(mail.body.encoded).to match('6600')
+      end
+
+      it "includes dates in email's body" do
+        expect(mail.body.encoded).to match("2016-03-14 - 2016-03-20")
       end
     end
   end

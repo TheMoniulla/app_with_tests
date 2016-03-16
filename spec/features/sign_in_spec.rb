@@ -4,7 +4,7 @@ describe 'the sign in process', type: :feature do
   before { create(:user, email: 'user@example.com', password: 'password', password_confirmation: 'password') }
 
   it 'signs me in when data is correct' do
-    visit 'user/sign_in'
+    visit 'users/sign_in'
     within('#new_user') do
       fill_in 'Email', with: 'user@example.com'
       fill_in 'Password', with: 'password'
@@ -14,7 +14,7 @@ describe 'the sign in process', type: :feature do
   end
 
   it 'shows error when data is not correct' do
-    visit 'user/sign_in'
+    visit 'users/sign_in'
     within('#new_user') do
       fill_in 'Email', with: 'user@example.com'
       fill_in 'Password', with: 'password2'
