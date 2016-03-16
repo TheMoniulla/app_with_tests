@@ -1,6 +1,9 @@
 class ExpensesImport < Struct.new(:file)
   require 'roo'
 
+  class ImportError < StandardError
+  end
+
   def import_for(user)
     spreadsheet = open_spreadsheet(file)
 
@@ -8,17 +11,18 @@ class ExpensesImport < Struct.new(:file)
     (2..spreadsheet.last_row).each do |line|
       name = spreadsheet.cell(line, 'A')
       price = spreadsheet.cell(line, 'B')
-      currency = spreadsheet.cell(line, 'C')
+      currency_name = spreadsheet.cell(line, 'C')
       description = spreadsheet.cell(line, 'D')
-      shop = spreadsheet.cell(line, 'E')
-      category = spreadsheet.cell(line, 'F')
+      shop_name = spreadsheet.cell(line, 'E')
+      expenses_category_name = spreadsheet.cell(line, 'F')
 
-      user.expenses.create!(name: name,
-                            price_value: price,
-                            description: description,
-                            shop_id: Shop.find_by(name: shop).id,
-                            currency_id: Currency.find_by(name: currency).id,
-                            expenses_category_id: ExpensesCategory.find_by(name: category).id)
+      expense = user.expenses.new(name: name,
+                                  price_value: price,
+                                  description: description,
+                                  shop_id: shop_id(shop_name),
+                                  currency_id: currency_id(currency_name),
+                                  expenses_category_id: expenses_category_id(expenses_category_name))
+      save(expense)
     end
   end
 
@@ -27,6 +31,38 @@ class ExpensesImport < Struct.new(:file)
   end
 
   private
+
+  def save(expense)
+    begin
+      expense.save!
+    rescue
+      raise ImportError.new("Validation failed: #{expense.errors.full_messages.join(', ')}")
+    end
+  end
+
+  def shop_id(name)
+    begin
+      Shop.find_by(name: name).id
+    rescue
+      raise ImportError.new("Shop with name '#{name}' was not found.")
+    end
+  end
+
+  def currency_id(name)
+    begin
+      Currency.find_by(name: name).id
+    rescue
+      raise ImportError.new("Currency with name '#{name}' was not found.")
+    end
+  end
+
+  def expenses_category_id(name)
+    begin
+      ExpensesCategory.find_by(name: name).id
+    rescue
+      raise ImportError.new("ExpensesCategory with name '#{name}' was not found.")
+    end
+  end
 
   def open_spreadsheet(file)
     case File.extname(file.original_filename)
@@ -37,7 +73,7 @@ class ExpensesImport < Struct.new(:file)
       when '.xls'
         Roo::Excel.new(file.path)
       else
-        raise "Unknown file type: #{file.original_filename}"
+        raise ImportError.new("Unknown file type: #{file.original_filename}")
     end
   end
 end

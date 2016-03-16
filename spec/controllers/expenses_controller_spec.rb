@@ -244,34 +244,72 @@ describe User::ExpensesController do
 
     describe '#import' do
       let(:expenses_import) { ExpensesImport.new }
-      let(:file) do
-        extend ActionDispatch::TestProcess
-        fixture_file_upload('files/expenses.ods', 'application/vnd.oasis.opendocument.spreadsheet')
-      end
-
       before do
         create(:currency, name: 'PLN')
-        create(:shop, name: 'H&M')
-        create(:shop, name: 'Tesco')
-        create(:shop, name: 'Rossmann')
-        create(:expenses_category, name: 'Clothes and Shoes')
+        create(:shop, name: 'Rik')
         create(:expenses_category, name: 'Toys')
-        create(:expenses_category, name: 'Food')
-        allow(file).to receive(:original_filename).and_return('expenses.ods')
-        allow(file).to receive(:path).and_return([Rails.root, 'spec/fixtures/files/expenses.ods'].join('/'))
       end
 
-      context 'when there is a file' do
-        it 'upload file' do
-          post :import, expenses_import: {file: file}
+      context 'file is correct' do
+        let(:file) do
+          extend ActionDispatch::TestProcess
+          fixture_file_upload('files/expenses.ods', 'application/vnd.oasis.opendocument.spreadsheet')
+        end
+
+
+        before do
+          allow(file).to receive(:original_filename).and_return('expenses.ods')
+          allow(file).to receive(:path).and_return([Rails.root, 'spec/fixtures/files/expenses.ods'].join('/'))
+        end
+
+        let(:call_request) { post :import, expenses_import: {file: file} }
+
+        it 'creates expenses' do
+          expect { call_request }.to change { Expense.count }.by 2
+        end
+
+        it 'redirects to user_expenses_path' do
+          call_request
           expect(response).to redirect_to(user_expenses_path)
-          expect(flash[:notice]).to eq 'Success.'
         end
       end
-      context "when there isn't a file" do
-        it "doesn't upload file" do
-          post :import, expenses_import: {file: nil}
+
+      context 'file is incorrect' do
+        let(:file) do
+          extend ActionDispatch::TestProcess
+          fixture_file_upload('files/expenses_wrong.ods', 'application/vnd.oasis.opendocument.spreadsheet')
+        end
+
+        before do
+          allow(file).to receive(:original_filename).and_return('expenses_wrong.ods')
+          allow(file).to receive(:path).and_return([Rails.root, 'spec/fixtures/files/expenses_wrong.ods'].join('/'))
+        end
+
+        let(:call_request) { post :import, expenses_import: {file: file} }
+
+        it 'noes not creates expenses' do
+          expect { call_request }.not_to change { Expense.count }
+        end
+
+        it 'redirects to user_expenses_path' do
+          call_request
           expect(response).to redirect_to(user_expenses_path)
+        end
+
+        it 'displays error massage' do
+          call_request
+          expect(flash[:alert]).to eq "Validation failed: Price value can't be blank"
+        end
+      end
+
+      context 'when file is missing' do
+        before { post :import, expenses_import: {file: nil} }
+
+        it 'redirects to user_expenses_path' do
+          expect(response).to redirect_to(user_expenses_path)
+        end
+
+        it 'displays error massage' do
           expect(flash[:alert]).to eq 'You have to upload file.'
         end
       end

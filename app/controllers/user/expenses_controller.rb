@@ -38,8 +38,8 @@ class User::ExpensesController < User::UserController
       begin
         ExpensesImport.new(params[:expenses_import][:file]).import_for(current_user)
         redirect_to user_expenses_path, notice: 'Success.'
-      rescue
-        redirect_to user_expenses_path, alert: 'Wrong data format.'
+      rescue ExpensesImport::ImportError => e
+        redirect_to user_expenses_path, alert: e.message
       end
     else
       redirect_to user_expenses_path, alert: 'You have to upload file.'
