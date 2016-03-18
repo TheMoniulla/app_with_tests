@@ -16,7 +16,7 @@ describe Api::V1::ExpensesController do
 
   describe '#show' do
     let!(:expense) { create(:expense, name: 'name') }
-    let(:call_request) { get :show, id: expense.id }
+    let(:call_request) { get :show, id: expense }
 
     it 'returns correct json' do
       call_request
@@ -53,7 +53,7 @@ describe Api::V1::ExpensesController do
 
   describe '#update' do
     let!(:expense) { create(:expense, name: 'name') }
-    let(:call_request) { put :update, expense: attributes, id: expense.id }
+    let(:call_request) { put :update, expense: attributes, id: expense }
 
     context 'a request has valid params' do
       let(:attributes) { {name: 'test'} }
@@ -65,7 +65,7 @@ describe Api::V1::ExpensesController do
         expect(JSON.parse(response.body)['expense']).to include("name" => "test")
       end
     end
-  #
+
     context 'a request has invalid params' do
       let(:attributes) { {name: nil} }
 
@@ -79,7 +79,7 @@ describe Api::V1::ExpensesController do
   end
 
   describe '#destroy' do
-    let(:call_request) { delete :destroy, id: expense.id }
+    let(:call_request) { delete :destroy, id: expense }
     let!(:expense) { create(:expense) }
 
     it { expect { call_request }.to change { Expense.count }.by(-1) }

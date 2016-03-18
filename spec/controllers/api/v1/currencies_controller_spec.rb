@@ -15,7 +15,7 @@ describe Api::V1::CurrenciesController do
 
   describe '#show' do
     let!(:currency) { create(:currency, name: "PLN") }
-    let(:call_request) { get :show, id: currency.id }
+    let(:call_request) { get :show, id: currency }
 
     it 'returns correct json' do
       call_request
@@ -52,7 +52,7 @@ describe Api::V1::CurrenciesController do
 
   describe '#update' do
     let!(:currency) { create(:currency, name: 'name') }
-    let(:call_request) { put :update, currency: attributes, id: currency.id }
+    let(:call_request) { put :update, currency: attributes, id: currency }
 
     context 'a request has valid params' do
       let(:attributes) { {name: 'test'} }
@@ -78,7 +78,7 @@ describe Api::V1::CurrenciesController do
   end
 
   describe '#destroy' do
-    let(:call_request) { delete :destroy, id: currency.id }
+    let(:call_request) { delete :destroy, id: currency }
     let!(:currency) { create(:currency) }
 
     it { expect { call_request }.to change { Currency.count }.by(-1) }
@@ -88,4 +88,3 @@ describe Api::V1::CurrenciesController do
     end
   end
 end
-

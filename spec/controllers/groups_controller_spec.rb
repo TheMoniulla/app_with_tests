@@ -4,7 +4,7 @@ describe GroupsController do
   let(:user) { create (:user) }
 
   context 'user not logged in' do
-    describe 'index' do
+    describe '#index' do
       let(:call_request) { get :index }
 
       it "doesn't allow to access action" do
@@ -32,7 +32,7 @@ describe GroupsController do
       end
     end
 
-    describe 'edit' do
+    describe '#edit' do
       let(:call_request) { get :edit, id: group.id }
       let(:group) { create(:group) }
 
@@ -102,7 +102,7 @@ describe GroupsController do
     end
 
     describe '#show' do
-      let(:call_request) { get :show, id: group.id }
+      let(:call_request) { get :show, id: group }
 
       context 'group for logged in user' do
         let!(:user) { create (:user) }
@@ -128,7 +128,7 @@ describe GroupsController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: group.id }
+      let(:call_request) { get :edit, id: group }
 
       context 'group for logged in user' do
         let(:group) { create(:group, owner_id: user.id) }
@@ -188,7 +188,7 @@ describe GroupsController do
     describe '#update' do
       let!(:user) { create(:user) }
       let!(:group) { create(:group, name: 'name', owner_id: user.id) }
-      let(:call_request) { put :update, group: attributes, id: group.id }
+      let(:call_request) { put :update, group: attributes, id: group }
 
       context 'a request has valid params' do
         let(:attributes) { {name: 'test'} }
@@ -214,6 +214,7 @@ describe GroupsController do
         end
       end
     end
+
     describe '#destroy' do
       let(:call_request) { delete :destroy, id: group.id, owner_id: user.id }
 

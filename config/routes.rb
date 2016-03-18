@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       resources :expenses_categories, only: [:index, :show, :create, :update, :destroy]
       resources :groups, only: [:index, :show, :create, :update, :destroy]
       resources :shops, only: [:index, :show, :create, :update, :destroy]
+      resources :shop_items, only: [:index, :show, :create, :update, :destroy]
     end
   end
 

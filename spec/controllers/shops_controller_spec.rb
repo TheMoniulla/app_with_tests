@@ -3,7 +3,7 @@ require 'rails_helper'
 describe ShopsController do
 
   context 'user not logged in' do
-    describe 'index' do
+    describe '#index' do
       let(:call_request) { get :index }
 
       it "doesn't allow to access action" do
@@ -21,8 +21,8 @@ describe ShopsController do
       end
     end
 
-    describe 'edit' do
-      let(:call_request) { get :edit, id: shop.id }
+    describe '#edit' do
+      let(:call_request) { get :edit, id: shop }
       let(:shop) { create(:shop) }
 
       it "doesn't allow to access action" do
@@ -44,7 +44,7 @@ describe ShopsController do
 
     describe '#update' do
       let!(:shop) { create(:shop, name: 'name') }
-      let(:call_request) { put :update, shop: attributes, id: shop.id }
+      let(:call_request) { put :update, shop: attributes, id: shop }
       let(:attributes) { {name: 'test'} }
 
       it "doesn't allow to access action" do
@@ -54,7 +54,7 @@ describe ShopsController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: shop.id }
+      let(:call_request) { delete :destroy, id: shop }
       let!(:shop) { create(:shop) }
 
       it "doesn't allow to access action" do
@@ -91,7 +91,7 @@ describe ShopsController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: shop.id }
+      let(:call_request) { get :edit, id: shop }
       let(:shop) { create(:shop) }
 
       context 'after request' do
@@ -132,7 +132,7 @@ describe ShopsController do
 
     describe '#update' do
       let!(:shop) { create(:shop, name: 'name') }
-      let(:call_request) { put :update, shop: attributes, id: shop.id }
+      let(:call_request) { put :update, shop: attributes, id: shop }
 
       context 'a request has valid params' do
         let(:attributes) { {name: 'test'} }
@@ -160,7 +160,7 @@ describe ShopsController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: shop.id }
+      let(:call_request) { delete :destroy, id: shop }
       let!(:shop) { create(:shop) }
 
       it { expect { call_request }.to change { Shop.count }.by(-1) }

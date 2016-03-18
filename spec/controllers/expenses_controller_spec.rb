@@ -4,7 +4,7 @@ describe User::ExpensesController do
   let(:user) { create(:user) }
 
   context 'user not logged in' do
-    describe 'index' do
+    describe '#index' do
       let(:call_request) { get :index }
 
       it "doesn't allow to access action" do
@@ -24,7 +24,7 @@ describe User::ExpensesController do
 
     describe '#show' do
       let(:expense) { create(:expense) }
-      let(:call_request) { get :show, id: expense.id }
+      let(:call_request) { get :show, id: expense }
 
       it "doesn't allow to access action" do
         call_request
@@ -32,8 +32,8 @@ describe User::ExpensesController do
       end
     end
 
-    describe 'edit' do
-      let(:call_request) { get :edit, id: expense.id }
+    describe '#edit' do
+      let(:call_request) { get :edit, id: expense }
       let(:expense) { create(:expense) }
 
       it "doesn't allow to access action" do
@@ -55,7 +55,7 @@ describe User::ExpensesController do
 
     describe '#update' do
       let!(:expense) { create(:expense, name: 'name', user: user) }
-      let(:call_request) { put :update, expense: attributes, id: expense.id }
+      let(:call_request) { put :update, expense: attributes, id: expense }
       let(:attributes) { {name: 'test'} }
 
       it "doesn't allow to access action" do
@@ -65,7 +65,7 @@ describe User::ExpensesController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: expense.id }
+      let(:call_request) { delete :destroy, id: expense }
       let!(:expense) { create(:expense) }
 
       it "doesn't allow to access action" do
@@ -101,7 +101,7 @@ describe User::ExpensesController do
     end
 
     describe '#show' do
-      let(:call_request) { get :show, id: expense.id }
+      let(:call_request) { get :show, id: expense }
 
       context 'expense for logged in user' do
         let!(:expense) { create(:expense, user: user) }
@@ -126,7 +126,7 @@ describe User::ExpensesController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: expense.id }
+      let(:call_request) { get :edit, id: expense }
 
       context 'expense for logged in user' do
         let(:expense) { create(:expense, user: user) }
@@ -183,7 +183,7 @@ describe User::ExpensesController do
 
     describe '#update' do
       let!(:expense) { create(:expense, name: 'name', user: user, photo: nil) }
-      let(:call_request) { put :update, expense: attributes, id: expense.id }
+      let(:call_request) { put :update, expense: attributes, id: expense }
 
       context 'a request has valid params' do
         let(:attributes) { {name: 'test'} }
@@ -194,6 +194,16 @@ describe User::ExpensesController do
           before { call_request }
 
           it { is_expected.to redirect_to user_expenses_path }
+        end
+
+        context 'when there is a photo' do
+          let(:file) do
+            extend ActionDispatch::TestProcess
+            fixture_file_upload('images/apple.png', 'image/png')
+          end
+          let(:attributes) { {photo: file} }
+
+          it { expect { call_request }.to change { expense.reload.photo_file_name }.from(nil).to('apple.png') }
         end
       end
 
@@ -211,7 +221,7 @@ describe User::ExpensesController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: expense.id, user: user }
+      let(:call_request) { delete :destroy, id: expense, user: user }
 
       context 'expense for logged in user' do
         let!(:expense) { create(:expense, user: user) }
@@ -287,7 +297,7 @@ describe User::ExpensesController do
 
         let(:call_request) { post :import, expenses_import: {file: file} }
 
-        it 'noes not creates expenses' do
+        it 'does not creates expenses' do
           expect { call_request }.not_to change { Expense.count }
         end
 
