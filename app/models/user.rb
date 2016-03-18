@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
 
   has_many :expenses
-  has_many :shop_items
-  has_many :memberships, inverse_of: :user
   has_many :groups, through: :memberships
-  has_many :owned_groups, class_name: 'Group', foreign_key: :owner_id
   has_many :identities
+  has_many :memberships, inverse_of: :user
+  has_many :owned_groups, class_name: 'Group', foreign_key: :owner_id
+  has_many :shop_items
 
   def twitter
     identities.where(provider: "twitter").first

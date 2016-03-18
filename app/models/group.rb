@@ -4,5 +4,5 @@ class Group < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
 
   validates :name, :owner_id, presence: true
-  validates :name, uniqueness: { scope: :owner, message: 'This group already exists!' }
+  validates :name, uniqueness: { scope: :owner_id, message: 'This group already exists!' }
 end

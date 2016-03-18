@@ -14,4 +14,6 @@ describe Expense do
   it { is_expected.to validate_presence_of :price_value }
   it { is_expected.to validate_presence_of :shop_id }
   it { is_expected.to validate_presence_of :user_id }
+
+  it { is_expected.to validate_attachment_content_type(:photo).allowing("image/jpg", "image/jpeg", "image/png", "image/gif")}
 end
