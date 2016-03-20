@@ -32,7 +32,7 @@ describe User::GroupsExpensesController do
     describe '#index' do
       let(:call_request) { get :index }
 
-      it "doesn't allow to access action" do
+      it "renders index" do
         call_request
         is_expected.to render_template 'index'
       end
