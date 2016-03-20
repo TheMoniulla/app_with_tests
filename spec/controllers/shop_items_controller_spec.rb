@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe User::ShopItemsController do
+  render_views
+
   let(:user) { create(:user) }
 
   context 'user not logged in' do
@@ -23,7 +25,7 @@ describe User::ShopItemsController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: shop_item }
+      let(:call_request) { get :edit, id: shop_item.id }
       let(:shop_item) { create(:shop_item) }
 
       it "doesn't allow to access action" do
@@ -45,7 +47,7 @@ describe User::ShopItemsController do
 
     describe '#update' do
       let!(:shop_item) { create(:shop_item, name: 'name', price_value: 55) }
-      let(:call_request) { put :update, shop_item: attributes, id: shop_item }
+      let(:call_request) { put :update, shop_item: attributes, id: shop_item.id }
       let(:attributes) { {name: 'test', price_value: 33} }
 
       it "doesn't allow to access action" do
@@ -55,7 +57,7 @@ describe User::ShopItemsController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: shop_item }
+      let(:call_request) { delete :destroy, id: shop_item.id }
       let!(:shop_item) { create(:shop_item) }
 
       it "doesn't allow to access action" do
@@ -91,7 +93,7 @@ describe User::ShopItemsController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: shop_item }
+      let(:call_request) { get :edit, id: shop_item.id }
 
       context 'shop_item for logged in user' do
         let(:shop_item) { create(:shop_item, user: user) }
@@ -147,7 +149,7 @@ describe User::ShopItemsController do
 
     describe '#update' do
       let!(:shop_item) { create(:shop_item, name: 'name', user: user) }
-      let(:call_request) { put :update, shop_item: attributes, id: shop_item }
+      let(:call_request) { put :update, shop_item: attributes, id: shop_item.id }
 
       context 'a request has valid params' do
         let(:attributes) { {name: 'test'} }
@@ -175,7 +177,7 @@ describe User::ShopItemsController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: shop_item, user: user }
+      let(:call_request) { delete :destroy, id: shop_item.id, user: user }
 
       context 'shop_item for logged in user' do
         let!(:shop_item) { create(:shop_item, user: user) }

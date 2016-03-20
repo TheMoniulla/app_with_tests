@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe GroupsController do
+  render_views
+
   let(:user) { create (:user) }
 
   context 'user not logged in' do
@@ -81,7 +83,7 @@ describe GroupsController do
     describe '#index' do
       let(:call_request) { get :index }
       let(:user) { create (:user) }
-      let(:group) { create(:group, name: 'name', owner_id: user.id) }
+      let!(:group) { create(:group, name: 'name', owner_id: user.id) }
 
       context 'after request' do
         before { call_request }
@@ -102,7 +104,7 @@ describe GroupsController do
     end
 
     describe '#show' do
-      let(:call_request) { get :show, id: group }
+      let(:call_request) { get :show, id: group.id }
 
       context 'group for logged in user' do
         let!(:user) { create (:user) }
@@ -128,7 +130,7 @@ describe GroupsController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: group }
+      let(:call_request) { get :edit, id: group.id }
 
       context 'group for logged in user' do
         let(:group) { create(:group, owner_id: user.id) }
@@ -188,7 +190,7 @@ describe GroupsController do
     describe '#update' do
       let!(:user) { create(:user) }
       let!(:group) { create(:group, name: 'name', owner_id: user.id) }
-      let(:call_request) { put :update, group: attributes, id: group }
+      let(:call_request) { put :update, group: attributes, id: group.id }
 
       context 'a request has valid params' do
         let(:attributes) { {name: 'test'} }

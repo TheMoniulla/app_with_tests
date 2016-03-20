@@ -1,4 +1,5 @@
 require 'rails_helper'
+include ActiveSupport::Testing::TimeHelpers
 
 describe GroupMailer do
   describe '#group_info_email' do
@@ -7,8 +8,6 @@ describe GroupMailer do
     let(:user_2) { create(:user, email: 'user2@user.com') }
     let(:user_3) { create(:user, email: 'user3@user.com') }
     let(:date) { '2016-03-16' }
-    let(:expenses) { Expense.for_group(group) }
-    let(:expenses_for_week) { expenses.for_week(Date.parse(date)) }
     let(:mail) { GroupMailer.group_info_email(date, group.id) }
 
     before do
@@ -35,6 +34,8 @@ describe GroupMailer do
     end
 
     context 'expneses exists' do
+      before { travel_to Time.parse("2016-03-18 10:10") }
+
       let!(:expense_1) { create(:expense, name: 'Macbook Pro', price_value: 5000, user: user_1) }
       let!(:expense_2) { create(:expense, name: 'Xperia Z3', price_value: 1600, user: user_2) }
       let!(:expense_wrong_user) { create(:expense, name: 'Bose', price_value: 440, user: user_3) }

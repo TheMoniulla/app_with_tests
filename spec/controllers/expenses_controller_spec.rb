@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe User::ExpensesController do
+  render_views
+
   let(:user) { create(:user) }
 
   context 'user not logged in' do
@@ -24,7 +26,7 @@ describe User::ExpensesController do
 
     describe '#show' do
       let(:expense) { create(:expense) }
-      let(:call_request) { get :show, id: expense }
+      let(:call_request) { get :show, id: expense.id }
 
       it "doesn't allow to access action" do
         call_request
@@ -33,7 +35,7 @@ describe User::ExpensesController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: expense }
+      let(:call_request) { get :edit, id: expense.id }
       let(:expense) { create(:expense) }
 
       it "doesn't allow to access action" do
@@ -55,7 +57,7 @@ describe User::ExpensesController do
 
     describe '#update' do
       let!(:expense) { create(:expense, name: 'name', user: user) }
-      let(:call_request) { put :update, expense: attributes, id: expense }
+      let(:call_request) { put :update, expense: attributes, id: expense.id }
       let(:attributes) { {name: 'test'} }
 
       it "doesn't allow to access action" do
@@ -65,7 +67,7 @@ describe User::ExpensesController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: expense }
+      let(:call_request) { delete :destroy, id: expense.id }
       let!(:expense) { create(:expense) }
 
       it "doesn't allow to access action" do
@@ -80,7 +82,7 @@ describe User::ExpensesController do
 
     describe '#index' do
       let(:call_request) { get :index }
-      let(:expense) { create(:expense, user: user) }
+      let!(:expense) { create(:expense, user: user) }
 
       context 'after request' do
         before { call_request }
@@ -101,7 +103,7 @@ describe User::ExpensesController do
     end
 
     describe '#show' do
-      let(:call_request) { get :show, id: expense }
+      let(:call_request) { get :show, id: expense.id }
 
       context 'expense for logged in user' do
         let!(:expense) { create(:expense, user: user) }
@@ -126,7 +128,7 @@ describe User::ExpensesController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: expense }
+      let(:call_request) { get :edit, id: expense.id }
 
       context 'expense for logged in user' do
         let(:expense) { create(:expense, user: user) }
@@ -183,7 +185,7 @@ describe User::ExpensesController do
 
     describe '#update' do
       let!(:expense) { create(:expense, name: 'name', user: user, photo: nil) }
-      let(:call_request) { put :update, expense: attributes, id: expense }
+      let(:call_request) { put :update, expense: attributes, id: expense.id }
 
       context 'a request has valid params' do
         let(:attributes) { {name: 'test'} }
@@ -221,7 +223,7 @@ describe User::ExpensesController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: expense, user: user }
+      let(:call_request) { delete :destroy, id: expense.id, user: user }
 
       context 'expense for logged in user' do
         let!(:expense) { create(:expense, user: user) }

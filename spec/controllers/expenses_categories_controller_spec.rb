@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ExpensesCategoriesController do
+  render_views
+
   context 'user not logged in' do
     describe '#index' do
       let(:call_request) { get :index }
@@ -21,7 +23,7 @@ describe ExpensesCategoriesController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: expenses_category }
+      let(:call_request) { get :edit, id: expenses_category.id }
       let(:expenses_category) { create(:expenses_category) }
 
       it "doesn't allow to access action" do
@@ -43,7 +45,7 @@ describe ExpensesCategoriesController do
 
     describe '#update' do
       let!(:expenses_category) { create(:expenses_category, name: 'name') }
-      let(:call_request) { put :update, expenses_category: attributes, id: expenses_category }
+      let(:call_request) { put :update, expenses_category: attributes, id: expenses_category.id }
       let(:attributes) { {name: 'test'} }
 
       it "doesn't allow to access action" do
@@ -53,7 +55,7 @@ describe ExpensesCategoriesController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: expenses_category }
+      let(:call_request) { delete :destroy, id: expenses_category.id }
       let!(:expenses_category) { create(:expenses_category) }
 
       it "doesn't allow to access action" do
@@ -68,7 +70,7 @@ describe ExpensesCategoriesController do
 
     describe '#index' do
       let(:call_request) { get :index }
-      let(:expenses_category) { create(:expenses_category, name: 'name', description: 'description') }
+      let!(:expenses_category) { create(:expenses_category, name: 'name', description: 'description') }
 
       context 'after request' do
         before { call_request }
@@ -89,7 +91,7 @@ describe ExpensesCategoriesController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: expenses_category }
+      let(:call_request) { get :edit, id: expenses_category.id }
       let(:expenses_category) { create(:expenses_category) }
 
       context 'after request' do
@@ -130,7 +132,7 @@ describe ExpensesCategoriesController do
 
     describe '#update' do
       let!(:expenses_category) { create(:expenses_category, name: 'name', description: 'description') }
-      let(:call_request) { put :update, expenses_category: attributes, id: expenses_category }
+      let(:call_request) { put :update, expenses_category: attributes, id: expenses_category.id }
 
       context 'a request has valid params' do
         let(:attributes) { {name: 'name', description: 'test'} }
@@ -159,7 +161,7 @@ describe ExpensesCategoriesController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: expenses_category }
+      let(:call_request) { delete :destroy, id: expenses_category.id }
       let!(:expenses_category) { create(:expenses_category) }
 
       it { expect { call_request }.to change { ExpensesCategory.count }.by(-1) }

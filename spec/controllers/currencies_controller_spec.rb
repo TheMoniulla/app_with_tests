@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe CurrenciesController do
+  render_views
 
   context 'user not logged in' do
     describe '#index' do
@@ -22,7 +23,7 @@ describe CurrenciesController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: currency }
+      let(:call_request) { get :edit, id: currency.id }
       let(:currency) { create(:currency) }
 
       it "doesn't allow to access action" do
@@ -54,7 +55,7 @@ describe CurrenciesController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: currency }
+      let(:call_request) { delete :destroy, id: currency.id }
       let!(:currency) { create(:currency) }
 
       it "doesn't allow to access action" do
@@ -69,7 +70,7 @@ describe CurrenciesController do
 
     describe '#index' do
       let(:call_request) { get :index }
-      let(:currency) { create(:currency, name: 'name') }
+      let!(:currency) { create(:currency, name: 'name') }
 
       context 'after request' do
         before { call_request }
@@ -90,7 +91,7 @@ describe CurrenciesController do
     end
 
     describe '#edit' do
-      let(:call_request) { get :edit, id: currency }
+      let(:call_request) { get :edit, id: currency.id }
       let(:currency) { create(:currency) }
 
       context 'after request' do
@@ -131,7 +132,7 @@ describe CurrenciesController do
 
     describe '#update' do
       let!(:currency) { create(:currency, name: 'name') }
-      let(:call_request) { put :update, currency: attributes, id: currency }
+      let(:call_request) { put :update, currency: attributes, id: currency.id }
 
       context 'a request has valid params' do
         let(:attributes) { {name: 'test'} }
@@ -159,7 +160,7 @@ describe CurrenciesController do
     end
 
     describe '#destroy' do
-      let(:call_request) { delete :destroy, id: currency }
+      let(:call_request) { delete :destroy, id: currency.id }
       let!(:currency) { create(:currency) }
 
       it { expect { call_request }.to change { Currency.count }.by(-1) }
