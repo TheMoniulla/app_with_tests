@@ -52,6 +52,7 @@ gem "paperclip", '~> 4.3'
 gem 'rails_db_sql', git: 'https://github.com/tb/rails_db_sql'
 gem 'sidekiq', '~> 4.1.1'
 gem 'figaro', '>= 1.1.1'
+gem 'faker', '>= 1.6.3'
 gem 'omniauth', '>= 1.3.1'
 gem 'omniauth-twitter', '>= 1.2.1'
 gem 'omniauth-facebook', '>= 1.4.0'
@@ -74,7 +75,6 @@ group :development, :test do
   gem 'factory_girl_rails', '>= 4.6.0'
   gem 'capybara', '>= 2.6.2'
   gem 'launchy', '>= 2.4.3'
-  gem 'faker', '>= 1.6.3'
 end
 
 group :development do
@@ -84,4 +84,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '>= 1.6.3'
 end
-
