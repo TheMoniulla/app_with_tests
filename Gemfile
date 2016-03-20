@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
-
+ruby "2.2.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '>= 1.3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -15,9 +15,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.1.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '>= 2.5.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -60,21 +60,22 @@ gem 'omniauth-facebook', '>= 1.4.0'
 gem 'twitter', '>= 5.16.0'
 gem 'omniauth-google-oauth2', '>= 0.2.2'
 gem 'google-api-client','>= 0.7.1', require: 'google/api_client'
+gem 'rails_12factor', '>= 0.0.3', group: :production
 
 group :test do
   #...
-  gem 'database_cleaner'
-  gem 'selleo-controller_tests'
-  gem 'shoulda-matchers'
+  gem 'database_cleaner', '>= 1.5.1'
+  gem 'selleo-controller_tests', '>= 0.0.6'
+  gem 'shoulda-matchers', '>= 3.1.1'
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'byebug', '>= 8.2.2'
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails'
-  gem 'capybara'
-  gem 'launchy'
+  gem 'factory_girl_rails', '>= 4.6.0'
+  gem 'capybara', '>= 2.6.2'
+  gem 'launchy', '>= 2.4.3'
   gem 'faker', '>= 1.6.3'
 end
 
@@ -83,6 +84,6 @@ group :development do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '>= 1.6.3'
 end
 
