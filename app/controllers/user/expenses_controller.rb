@@ -1,5 +1,6 @@
 class User::ExpensesController < User::UserController
   before_action :check_ownership, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json
 
   expose(:expenses) { current_user.expenses }
   expose_decorated(:expense, attributes: :expense_params)
@@ -9,20 +10,23 @@ class User::ExpensesController < User::UserController
     expenses_categories.map { |category| category.expenses.for_user(current_user).sum(:price_value).to_f }
   end
 
+
+  def new
+    respond_modal_with expense
+  end
+
+  def edit
+    respond_modal_with expense
+  end
+
   def create
-    if expense.save
-      redirect_to user_expenses_path
-    else
-      render :new
-    end
+    expense.save
+    respond_modal_with expense, location: user_expenses_path
   end
 
   def update
-    if expense.save
-      redirect_to user_expenses_path
-    else
-      render :edit
-    end
+    expense.save
+    respond_modal_with expense, location: user_expenses_path
   end
 
   def destroy

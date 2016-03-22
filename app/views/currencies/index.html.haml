@@ -1,5 +1,5 @@
 %h1 Currencies
-= link_to 'New currency', new_currency_path, class: 'btn btn-success'
+= link_to 'New currency', new_currency_path, data: { modal: true }, class: 'btn btn-success'
 
 %table.table.table-striped
   %tr
@@ -9,5 +9,5 @@
     %tr
       %td= currency.name
       %td
-        = link_to 'Edit', edit_currency_path(currency.id)
+        = link_to 'Edit', edit_currency_path(currency.id), data: { modal: true }
         = link_to 'Delete', currency_path(currency.id), method: :delete, data: {confirm: 'Are you sure?'}

@@ -1,5 +1,5 @@
 %h1 Groups
-= link_to 'New group', new_group_path, class: 'btn btn-success'
+= link_to 'New group', new_group_path, data: { modal: true }, class: 'btn btn-success'
 
 %table.table.table-striped
   %tr
@@ -9,6 +9,6 @@
     %tr
       %td= group.name
       %td
-        = link_to 'Edit', edit_group_path(group.id)
+        = link_to 'Edit', edit_group_path(group.id), data: { modal: true }
         = link_to 'Show', group_path(group.id)
         = link_to 'Delete', group_path(group.id), method: :delete, data: {confirm: 'Are you sure?'}

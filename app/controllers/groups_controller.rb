@@ -1,22 +1,26 @@
 class GroupsController < ApplicationController
+  respond_to :html, :json
+
   before_action :check_access_to_group, only: [:show, :edit, :update, :destroy]
   expose(:groups) { current_user.owned_groups }
   expose_decorated(:group, attributes: :group_params)
 
+  def new
+    respond_modal_with group
+  end
+
+  def edit
+    respond_modal_with group
+  end
+
   def create
-    if group.save
-      redirect_to groups_path
-    else
-      render :new
-    end
+   group.save
+    respond_modal_with group, location: groups_path
   end
 
   def update
-    if group.save
-      redirect_to groups_path
-    else
-      render :edit
-    end
+    group.save
+    respond_modal_with group, location: groups_path
   end
 
   def destroy

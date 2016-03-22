@@ -1,21 +1,25 @@
 class ShopsController < ApplicationController
+  respond_to :html, :json
+
   expose(:shops)
   expose(:shop, attributes: :shop_params)
 
+  def new
+    respond_modal_with shop
+  end
+
+  def edit
+    respond_modal_with shop
+  end
+
   def create
-    if shop.save
-      redirect_to shops_path
-    else
-      render :new
-    end
+    shop.save
+    respond_modal_with shop, location: shops_path
   end
 
   def update
-    if shop.save
-      redirect_to shops_path
-    else
-      render :edit
-    end
+    shop.save
+    respond_modal_with shop, location: shops_path
   end
 
   def destroy

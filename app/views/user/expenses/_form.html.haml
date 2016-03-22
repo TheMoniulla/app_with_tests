@@ -1,4 +1,4 @@
-= simple_form_for [:user, expense], html: { multipart: true } do |f|
+= simple_form_for [:user, expense], remote: request.xhr?, html: { data: { modal: true }, multipart: true } do |f|
   = f.input :name
   = f.input :price_value
   = f.association :currency, include_blank: false

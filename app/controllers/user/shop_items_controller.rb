@@ -1,25 +1,28 @@
 class User::ShopItemsController < User::UserController
   before_action :check_ownership, only: [:edit, :update, :destroy]
+  respond_to :html, :json
 
   expose(:shop_items) { current_user.shop_items }
   expose_decorated(:shop_item, attributes: :shop_item_params)
   expose(:shop_items_for_day) { current_user.shop_items.for_day(date) }
   expose(:date) { params[:date] ? Date.parse(params[:date]) : Date.today }
 
+  def new
+    respond_modal_with shop_item
+  end
+
+  def edit
+    respond_modal_with shop_item
+  end
+
   def create
-    if shop_item.save
-      redirect_to user_shop_items_path
-    else
-      render :new
-    end
+    shop_item.save
+    respond_modal_with shop_item, location: user_shop_items_path
   end
 
   def update
-    if shop_item.save
-      redirect_to user_shop_items_path
-    else
-      render :edit
-    end
+    shop_item.save
+    respond_modal_with shop_item, location: user_shop_items_path
   end
 
   def destroy

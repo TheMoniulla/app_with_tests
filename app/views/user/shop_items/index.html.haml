@@ -1,5 +1,5 @@
 %h1 Shop list
-%p= link_to 'New item', new_user_shop_item_path, class: 'btn btn-success'
+%p= link_to 'New item', new_user_shop_item_path, data: { modal: true }, class: 'btn btn-success'
 
 %table.table.table-striped
   %tr
@@ -20,7 +20,7 @@
       %td= shop_item.shop.name
       %td= shop_item.expenses_category.name
       %td
-        = link_to 'Edit', edit_user_shop_item_path(shop_item.id)
+        = link_to 'Edit', edit_user_shop_item_path(shop_item.id), data: { modal: true }
         = link_to 'Delete', user_shop_item_path(shop_item.id), method: :delete, data: {confirm: 'Are you sure?'}
   %tr
     %td
@@ -55,7 +55,7 @@
       %td= shop_item.shop.name
       %td= shop_item.expenses_category.name
       %td
-        = link_to 'Edit', edit_user_shop_item_path(shop_item.id)
+        = link_to 'Edit', edit_user_shop_item_path(shop_item.id), data: { modal: true }
         = link_to 'Delete', user_shop_item_path(shop_item.id), method: :delete, data: {confirm: 'Are you sure?'}
   %tr
     %td

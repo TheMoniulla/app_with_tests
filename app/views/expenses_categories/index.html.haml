@@ -1,5 +1,5 @@
 %h1 Expenses categories
-= link_to 'New expenses category', new_expenses_category_path, class: 'btn btn-success'
+= link_to 'New expenses category', new_expenses_category_path, data: { modal: true }, class: 'btn btn-success'
 
 %table.table.table-striped
   %tr
@@ -11,5 +11,5 @@
       %td= category.name
       %td= category.description
       %td
-        = link_to 'Edit', edit_expenses_category_path(category.id)
+        = link_to 'Edit', edit_expenses_category_path(category.id), data: { modal: true }
         = link_to 'Delete', expenses_category_path(category.id), method: :delete, data: {confirm: 'Are you sure?'}

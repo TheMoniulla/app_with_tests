@@ -1,21 +1,25 @@
 class CurrenciesController < ApplicationController
+  respond_to :html, :json
+
   expose(:currencies)
   expose(:currency, attributes: :currency_params)
 
+  def new
+    respond_modal_with currency
+  end
+
+  def edit
+    respond_modal_with currency
+  end
+
   def create
-    if currency.save
-      redirect_to currencies_path
-    else
-      render :new
-    end
+    currency.save
+    respond_modal_with currency, location: currencies_path
   end
 
   def update
-    if currency.save
-      redirect_to currencies_path
-    else
-      render :edit
-    end
+    currency.save
+    respond_modal_with currency, location: currencies_path
   end
 
   def destroy
