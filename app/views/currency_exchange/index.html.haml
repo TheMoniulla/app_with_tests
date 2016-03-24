@@ -23,7 +23,17 @@
   1 EUR =
   ="#{money_eur.exchange_to(:USD)} USD"
 %br
-  = select_tag 'change_setting', options_for_select(currency_exchange_settings.map(&:for_display)), onchange: 'setCurrencyExchangeSetting()'
+  %table.table.table-striped
+    %tr
+      %th Settings
+      %th Actions
+    - currency_exchange_settings.each do |setting|
+      %tr
+        %td{id: "setting_#{setting.id}"}
+          = setting.for_display
+        %td
+          = link_to 'Apply', 'javascript:void(0)', onclick: "setCurrencyExchangeSetting(#{setting.id})"
+          = link_to 'Delete', currency_exchange_setting_path(setting), method: :delete, data: {confirm: 'Are you sure?'}
 %h4
   = form_tag :currency_exchange_index, method: :get, remote: true, id: 'currency_exchange_form' do
     = text_field_tag 'value', value, onkeyup: 'submitCurrencyExchangeForm()'
@@ -49,12 +59,12 @@
     $('#new_currency_exchange_setting').submit();
   }
 
-  function setCurrencyExchangeSetting() {
-    attrs = $('#change_setting').val().split(', ');
+  function setCurrencyExchangeSetting(id) {
+    attrs = $('#setting_' + id).html().trim().split(', ');
     $('#value').val([attrs[0]]);
     $('#base_currency').val([attrs[1]]);
     $('#new_currency').val([attrs[2]]);
-    submitCurrencyExchangeForm()
+    submitCurrencyExchangeForm();
   }
 
   function submitCurrencyExchangeForm() {

@@ -7,6 +7,11 @@ class CurrencyExchangeSettingsController < ApplicationController
     end
   end
 
+  def destroy
+    currency_exchange_setting.destroy
+    redirect_to currency_exchange_index_path
+  end
+
   private
 
   def currency_exchange_setting_params

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
   resources :currencies, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :currency_exchange, only: :index
-  resources :currency_exchange_settings, only: :create
+  resources :currency_exchange_settings, only: [:create, :destroy]
   resources :groups
   resources :expenses_categories, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :shops, only: [:index, :new, :create, :edit, :update, :destroy]
