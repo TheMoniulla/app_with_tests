@@ -24,13 +24,12 @@
   ="#{money_eur.exchange_to(:USD)} USD"
 %br
 %h4
-  = form_tag :currency_exchange_index, method: :get, remote: true do
-    = text_field_tag 'value', value
-    = select_tag 'base_currency', options_for_select(currencies.map(&:name), base_currency)
+  = form_tag :currency_exchange_index, method: :get, remote: true, id: 'currency_exchange_form' do
+    = text_field_tag 'value', value, "onkeyup" => "$('#currency_exchange_form').submit()"
+    = select_tag 'base_currency', options_for_select(currencies.map(&:name), base_currency), "onchange" => "$('#currency_exchange_form').submit()"
     %p
       Convert to:
-      = select_tag 'new_currency', options_for_select(currencies.map(&:name), new_currency)
-    = submit_tag "convert"
+      = select_tag 'new_currency', options_for_select(currencies.map(&:name), new_currency), "onchange" => "$('#currency_exchange_form').submit()"
   Converted value:
   %span#converted_value_holder
     = converted_value
