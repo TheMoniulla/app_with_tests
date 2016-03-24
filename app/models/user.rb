@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessor :current_password
+  attr_accessor :current_password, :skip_password_validation, :skip_email_validation
 
-  validates_presence_of :password, if: :password_required?
-  validates_confirmation_of :password, if: :password_required?
+  validates_presence_of :email, unless: :skip_email_validation
+  validates_uniqueness_of :email, allow_blank: true, if: :email_changed?
+  validates_format_of :email, with: Devise.email_regexp, allow_blank: true, if: :email_changed?
+
+  validates_presence_of :password, unless: :skip_password_validation
+  validates_confirmation_of :password, unless: :skip_password_validation
   validates_length_of :password, within: Devise.password_length, allow_blank: true
 
   # Include default devise modules. Others available are:
@@ -47,12 +51,5 @@ class User < ActiveRecord::Base
     else
       "Your weekly expenses were lower than expenses from last week."
     end
-  end
-
-  private
-
-  def password_required?
-    return false if email.blank?
-    !persisted? || !password.nil? || !password_confirmation.nil?
   end
 end

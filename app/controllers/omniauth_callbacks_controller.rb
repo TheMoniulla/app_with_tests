@@ -16,7 +16,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     user = identity.user || current_user
     if user.nil?
-      user = User.create(email: identity.email || "")
+      user = User.create(email: identity.email || "", skip_password_validation: true, skip_email_validation: true)
       identity.update_attribute(:user_id, user.id)
     end
 
