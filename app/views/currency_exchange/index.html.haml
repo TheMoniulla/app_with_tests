@@ -1,0 +1,35 @@
+%h3 Currency rates
+%br
+  1 PLN =
+  ="#{money_pln.exchange_to(:USD)} USD"
+
+%br
+  1 PLN =
+  ="#{money_pln.exchange_to(:EUR)} EUR"
+
+%br
+  1 USD =
+  ="#{money_usd.exchange_to(:PLN)} PLN"
+
+%br
+  1 USD =
+  ="#{money_usd.exchange_to(:EUR)} EUR"
+
+%br
+  1 EUR =
+  ="#{money_eur.exchange_to(:PLN)} PLN"
+
+%br
+  1 EUR =
+  ="#{money_eur.exchange_to(:USD)} USD"
+%br
+%h4
+  = form_tag :currency_exchange_index, method: :get do
+    = text_field_tag 'value', value
+    = select_tag 'base_currency', options_for_select(currencies.map(&:name), base_currency)
+    %p
+      Convert to:
+      = select_tag 'new_currency', options_for_select(currencies.map(&:name), new_currency)
+    = submit_tag "convert"
+    Value:
+    = converted_value

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   end
 
   resources :currencies, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :currency_exchange, only: :index
   resources :groups
   resources :expenses_categories, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :shops, only: [:index, :new, :create, :edit, :update, :destroy]
