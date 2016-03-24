@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323141633) do
+ActiveRecord::Schema.define(version: 20160324181102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "currencies", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "currency_exchange_settings", force: :cascade do |t|
+    t.decimal  "value"
+    t.string   "base_currency"
+    t.string   "new_currency"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|

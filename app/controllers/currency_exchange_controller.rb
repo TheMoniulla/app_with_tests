@@ -10,4 +10,5 @@ class CurrencyExchangeController < ApplicationController
     m = Money.new(value, base_currency)
     m.exchange_to(new_currency).to_f * 100
   end
+  expose(:currency_exchange_settings) { CurrencyExchangeSetting.all}
 end
