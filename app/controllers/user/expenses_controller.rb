@@ -10,7 +10,6 @@ class User::ExpensesController < User::UserController
     expenses_categories.map { |category| category.expenses.for_user(current_user).sum(:price_value).to_f }
   end
 
-
   def new
     respond_modal_with expense
   end

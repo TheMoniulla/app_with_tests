@@ -1,0 +1,103 @@
+:javascript
+  $(function () {
+      $('#eur_rates_chart').highcharts({
+          chart: {
+              zoomType: 'x'
+          },
+          title: {
+              text: 'EUR to PLN exchange rate over time'
+          },
+          xAxis: {
+              type: 'datetime'
+          },
+          yAxis: {
+              title: {
+                  text: 'Exchange rate'
+              }
+          },
+          plotOptions: {
+              area: {
+                  fillColor: {
+                      linearGradient: {
+                          x1: 0,
+                          y1: 0,
+                          x2: 0,
+                          y2: 1
+                      },
+                      stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                  },
+              marker: {
+                  radius: 2
+              },
+              lineWidth: 1,
+              states: {
+                  hover: {
+                      lineWidth: 1
+                  }
+              },
+              threshold: null
+              }
+          },
+          series: [{
+              type: 'area',
+              name: 'PLN to EUR',
+              data: #{eur_chart_data}
+            }
+          ]
+      });
+
+      $('#usd_rates_chart').highcharts({
+          chart: {
+              zoomType: 'x'
+          },
+          title: {
+              text: 'USD to PLN exchange rate over time'
+          },
+          xAxis: {
+              type: 'datetime'
+          },
+          yAxis: {
+              title: {
+                  text: 'Exchange rate'
+              }
+          },
+          plotOptions: {
+              area: {
+                  fillColor: {
+                      linearGradient: {
+                          x1: 0,
+                          y1: 0,
+                          x2: 0,
+                          y2: 1
+                      },
+                      stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                  },
+              marker: {
+                  radius: 2
+              },
+              lineWidth: 1,
+              states: {
+                  hover: {
+                      lineWidth: 1
+                  }
+              },
+              threshold: null
+              }
+          },
+          series: [{
+              type: 'area',
+              name: 'PLN to USD',
+              data: #{usd_chart_data}
+            }
+          ]
+      });
+  });
+
+#eur_rates_chart{style: "min-width: 310px; height: 400px; margin: 0 auto"};
+#usd_rates_chart{style: "min-width: 310px; height: 400px; margin: 0 auto"};

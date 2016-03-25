@@ -62,6 +62,7 @@ gem 'google-api-client','>= 0.7.1', require: 'google/api_client'
 gem 'rails_12factor', '>= 0.0.3', group: :production
 gem 'activerecord-session_store', '>= 0.1.2'
 gem 'google_currency', '>= 3.3.0'
+gem 'redis-namespace', '>= 1.5.2'
 
 group :test do
   #...
