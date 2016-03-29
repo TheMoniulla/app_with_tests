@@ -34,39 +34,35 @@
         %td
           = link_to 'Apply', 'javascript:void(0)', onclick: "setCurrencyExchangeSetting(#{setting.id})"
           = link_to 'Delete', currency_exchange_setting_path(setting), method: :delete, data: {confirm: 'Are you sure?'}
-%h4
-  = form_tag :currency_exchange_index, method: :get, remote: true, id: 'currency_exchange_form' do
-    = text_field_tag 'value', value, onkeyup: 'submitCurrencyExchangeForm()'
-    = select_tag 'base_currency', options_for_select(currencies.map(&:name), base_currency), onchange: 'submitCurrencyExchangeForm()'
-    %p
-      Convert to:
-      = select_tag 'new_currency', options_for_select(currencies.map(&:name), new_currency), onchange: 'submitCurrencyExchangeForm()'
-  Converted value:
-  %span#converted_value_holder
-    = converted_value
 
-  = simple_form_for CurrencyExchangeSetting.new do |f|
-    = f.input :value, as: :hidden
-    = f.input :base_currency, as: :hidden
-    = f.input :new_currency, as: :hidden
-    = link_to 'Save setting', '#', onclick: 'saveCurrencyExchangeSetting()', class: 'btn btn-success'
+  = simple_form_for new_currency_exchange_setting do |f|
+    = f.input :value, input_html: {onkeyup: 'calculateConvertedValue()'}
+    = f.input :base_currency, collection: currencies_for_select, input_html: {onchange: 'calculateConvertedValue()'}, include_blank: false
+    = f.input :new_currency, collection: currencies_for_select, input_html: {onchange: 'calculateConvertedValue()'}, include_blank: false
+    = f.submit 'save setting'
+    Converted value:
+    %span#converted_value_holder
+      = converted_value
 
 :javascript
-  function saveCurrencyExchangeSetting() {
-    $('#currency_exchange_setting_value').val($('#value').val());
-    $('#currency_exchange_setting_base_currency').val($('#base_currency').val());
-    $('#currency_exchange_setting_new_currency').val($('#new_currency').val());
-    $('#new_currency_exchange_setting').submit();
-  }
-
   function setCurrencyExchangeSetting(id) {
     attrs = $('#setting_' + id).html().trim().split(', ');
-    $('#value').val([attrs[0]]);
-    $('#base_currency').val([attrs[1]]);
-    $('#new_currency').val([attrs[2]]);
-    submitCurrencyExchangeForm();
+    $('#currency_exchange_setting_value').val([attrs[0]]);
+    $('#currency_exchange_setting_base_currency').val([attrs[1]]);
+    $('#currency_exchange_setting_new_currency').val([attrs[2]]);
+    calculateConvertedValue();
   }
 
-  function submitCurrencyExchangeForm() {
-    $('#currency_exchange_form').submit();
+  function calculateConvertedValue() {
+    value = $('#currency_exchange_setting_value').val()
+    base_currency = $('#currency_exchange_setting_base_currency').val()
+    new_currency = $('#currency_exchange_setting_new_currency').val()
+
+    $.ajax({
+      url: '/currency_exchange',
+      dataType: 'json',
+      data: {value: value, base_currency: base_currency, new_currency: new_currency}
+    }).done(function(response) {
+      $('#converted_value_holder').html(response.converted_value)
+    });
   }
