@@ -1,10 +1,8 @@
 class GoogleSearchController < ApplicationController
-  expose(:query) { params[:query] || "" }
-  expose(:result) { Google::Search::News.new(query: query) unless query == "" }
+  expose(:query) { params[:query] || '' }
+  expose(:result) { Google::Search::Web.new(query: query) unless query.blank? }
 
   def index
-    if query != ""
-        GoogleQuery.create(value: query, count: 1)
-    end
+    GoogleQuery.create(value: query, count: 1) unless query.blank?
   end
 end

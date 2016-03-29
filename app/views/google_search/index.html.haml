@@ -1,6 +1,5 @@
-= form_tag :google_search_index, method: :get do
-  = text_field_tag 'query', query
-  = submit_tag 'Search'
+= form_tag :google_search_index, id:'google_search_form', method: :get do
+  = text_field_tag 'query', query, autocomplete: :off
 
 %ul
   - unless result == nil
@@ -8,3 +7,18 @@
       %li
         = link_to "#{result.title}", result.uri
         %p= result.content
+
+:javascript
+  var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+      clearTimeout (timer);
+      timer = setTimeout(callback, ms);
+    };
+  })();
+
+  $('#query').keyup(function() {
+    delay(function(){
+      $('#google_search_form').submit();
+    }, 2000 );
+  });
