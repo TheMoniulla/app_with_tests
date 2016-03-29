@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325122634) do
+ActiveRecord::Schema.define(version: 20160329080546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,13 @@ ActiveRecord::Schema.define(version: 20160325122634) do
   create_table "expenses_categories", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "google_queries", force: :cascade do |t|
+    t.string   "value"
+    t.integer  "count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

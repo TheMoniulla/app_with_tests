@@ -130,6 +130,8 @@ GEM
       retriable (>= 1.4)
       signet (>= 0.5.0)
       uuidtools (>= 2.1.0)
+    google-search (1.0.3)
+      json
     google_currency (3.3.0)
       money (~> 6.7)
     haml (4.0.7)
@@ -402,6 +404,7 @@ DEPENDENCIES
   faker (>= 1.6.3)
   figaro (>= 1.1.1)
   google-api-client (>= 0.7.1)
+  google-search (>= 1.0.3)
   google_currency (>= 3.3.0)
   haml (>= 4.0.7)
   highcharts-rails (>= 4.1.9)

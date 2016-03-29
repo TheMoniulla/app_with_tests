@@ -63,6 +63,7 @@ gem 'rails_12factor', '>= 0.0.3', group: :production
 gem 'activerecord-session_store', '>= 0.1.2'
 gem 'google_currency', '>= 3.3.0'
 gem 'redis-namespace', '>= 1.5.2'
+gem 'google-search', '>= 1.0.3'
 
 group :test do
   #...

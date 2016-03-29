@@ -1,0 +1,16 @@
+%h3
+  Search statistics
+%p
+  - unique_queries.each do |unique_query|
+    %p Query: "#{unique_query}"
+    %p Search quantity: #{grouped_queries(unique_query).count}
+    %table.table
+      %tr
+        %th Value
+        %th Date
+      -grouped_queries(unique_query).each do |query|
+        %tr
+          %td= query.value
+          %td= query.created_at.strftime("%Y-%m-%d %H:%M:%S")
+
+= link_to 'Send statistics', send_statistics_mail_google_queries_path, class: 'btn btn-success'

@@ -1,0 +1,10 @@
+= form_tag :google_search_index, method: :get do
+  = text_field_tag 'query', query
+  = submit_tag 'Search'
+
+%ul
+  - unless result == nil
+    - result.each do |result|
+      %li
+        = link_to "#{result.title}", result.uri
+        %p= result.content

@@ -14,4 +14,8 @@ module ApplicationHelper
   def percentage_usage(expense, expenses)
     "#{price(expense.price_value * 100 / total_price(expenses))} %"
   end
+
+  def grouped_queries(unique_query)
+    GoogleQuery.all.select { |query| query.value == unique_query }
+  end
 end

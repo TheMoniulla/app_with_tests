@@ -40,6 +40,12 @@ Rails.application.routes.draw do
   resources :groups
   resources :expenses_categories, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :shops, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :google_search, only: :index
+  resources :google_queries, only: :index do
+    collection do
+      get :send_statistics_mail
+    end
+  end
 
   namespace :api do
     namespace :v1 do
