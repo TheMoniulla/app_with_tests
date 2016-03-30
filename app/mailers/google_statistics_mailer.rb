@@ -4,7 +4,7 @@ class GoogleStatisticsMailer < ApplicationMailer
   def statistics_email(user)
     @user = user
     @google_queries = GoogleQuery.all
-    @unique_queries = @google_queries.map(&:value).uniq
+    @unique_queries = @google_queries.pluck(:value).uniq
     mail(to: @user.email, subject: 'Google search statistics')
   end
 end

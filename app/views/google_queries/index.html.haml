@@ -11,6 +11,6 @@
       -grouped_queries(unique_query).each do |query|
         %tr
           %td= query.value
-          %td= query.created_at.strftime("%Y-%m-%d %H:%M:%S")
+          %td= query.decorate.search_date_for_display(query)
 
 = link_to 'Send statistics', send_statistics_mail_google_queries_path, class: 'btn btn-success'

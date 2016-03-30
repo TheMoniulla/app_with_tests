@@ -2,11 +2,10 @@
   = text_field_tag 'query', query, autocomplete: :off
 
 %ul
-  - unless result == nil
-    - result.each do |result|
-      %li
-        = link_to "#{result.title}", result.uri
-        %p= result.content
+  - result.each do |result|
+    %li
+      = link_to "#{result.title}", result.uri
+      %p= result.content
 
 :javascript
   var delay = (function(){

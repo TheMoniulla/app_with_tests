@@ -1,5 +1,5 @@
 class CurrencyExchangeSettingsController < ApplicationController
-  expose(:currency_exchange_setting, attributes: :currency_exchange_setting_params)
+  expose_decorated(:currency_exchange_setting, attributes: :currency_exchange_setting_params)
 
   def create
     if currency_exchange_setting.save

@@ -16,6 +16,6 @@ module ApplicationHelper
   end
 
   def grouped_queries(unique_query)
-    GoogleQuery.all.select { |query| query.value == unique_query }
+    GoogleQuery.where(value: unique_query)
   end
 end

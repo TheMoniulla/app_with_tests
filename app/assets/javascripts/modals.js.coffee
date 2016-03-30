@@ -1,13 +1,22 @@
 $ ->
+
+  removeOldModalBackdrop = ->
+    $('.modal-backdrop').remove()
+
+  loadModalDialogFromServer = (location) ->
+    $.get location, (data) ->
+      $(modal_holder_selector).html(data).find(modal_selector).modal()
+
+  replaceOldModalWithNewOne = ->
+    $(modal_holder_selector).html(data).find(modal_selector).modal();
+
   modal_holder_selector = '#modal-holder'
   modal_selector = '.modal'
 
   $(document).on 'click', 'a[data-modal]', ->
     location = $(this).attr('href')
     #Load modal dialog from server
-    $.get location, (data)->
-      $(modal_holder_selector).html(data).
-      find(modal_selector).modal()
+    loadModalDialogFromServer(location)
     false
 
   $(document).on 'ajax:success',
@@ -18,9 +27,7 @@ $ ->
         window.location = url
       else
         # Remove old modal backdrop
-        $('.modal-backdrop').remove()
+        removeOldModalBackdrop()
 
         # Replace old modal with new one
-        $(modal_holder_selector).html(data).
-        find(modal_selector).modal()
-      false
+        replaceOldModalWithNewOne()
