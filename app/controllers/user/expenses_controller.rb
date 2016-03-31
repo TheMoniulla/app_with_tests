@@ -31,7 +31,7 @@ class User::ExpensesController < User::UserController
   def destroy
     expense.destroy
     respond_to do |format|
-      format.html
+      format.html { redirect_to user_expenses_path }
       format.js
     end
   end
